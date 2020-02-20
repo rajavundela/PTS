@@ -1,0 +1,142 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.mine {
+    height: 100%;
+    background-color: black;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('img/home-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    color: #fff;
+}
+
+    .mine img {
+        width: 200px;
+        float: left;
+        margin-top: -45px;
+    }
+
+a.login-btn {
+    width: 150px;
+    padding: 10px;
+    outline: none !important;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    background: transparent;
+    color: #fff;
+    float: right;
+    margin-top: 20px;
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    text-decoration: none;
+    background-color: #1d9e39;
+    border: 1px solid #18691f;
+    color: #fff;
+}
+
+.mine h1 {
+    padding-top: 230px;
+    padding-bottom: 15px;
+    font-size: 55px;
+}
+
+
+
+.input-group {
+    width: 90% !important;
+    max-width: 500px;
+    border-radius: 30px;
+    background: #fff;
+    margin: auto;
+    padding: 2px;
+}
+
+.form-control {
+    border: 0 !important;
+    border-radius: 30px !important;
+    margin: 2px;
+    box-shadow: none !important;
+}
+
+.input-group-text {
+    width: 100px;
+    background-image: linear-gradient(#15ff00,#c0ce40);
+    border: 0 !important;
+    color: #fff !important;
+    padding: 0 25px;
+    border-radius: 30px !important;
+    box-shadow: none !important;
+}
+
+
+
+.features {
+    padding: 100px 0;
+}
+
+    .features h1 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+.feature-img img {
+    width: 100%;
+}
+
+.feature-img {
+    position: relative;
+}
+
+.feature-details {
+    padding: 20px;
+    text-align: justify;
+}
+
+    .feature-details h4 {
+        font-weight: 600;
+        margin-top: 20px;
+    }
+
+.feature-box {
+    box-shadow: 0 0 10px rgba(37,73,214,1.18);
+    margin-bottom: 30px;
+}
+
+.footer {
+    padding: 100px 200px;
+    background-image: linear-gradient(#996f15,#0b5c23);
+    color: #fff;
+}
+
+#qr_adv {
+    margin-top: 20px;
+    padding-bottom:50px;
+}
+
+#qr {
+    margin-top: 15px;
+}
+
+#adv {
+    margin-top: 15px;
+}
+
+
+
+@media (min-width:74.9em) {
+
+    #qr {
+        padding-left: 300px;
+    }
+
+    #adv {
+        padding-right: 300px;
+    }
+}

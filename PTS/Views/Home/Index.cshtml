@@ -2,8 +2,175 @@
     ViewBag.Title = "Home Page";
 }
 
+@section HeadContent
+{
+    <link href="~/Content/home/HomeStyles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+}
+
+<section class="mine">
+
+    <h1>Discover what's out there</h1>
+
+    <form>
+
+        <div class="input-group">
+
+            <input type="text" class="form-control" placeholder="Search">
+
+            <div class="input-group-append">
+
+                <button type="submit" class="input-group-text btn">Search</button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="container" id="qr_adv">
+
+        <div class="row">
+
+            <div class="col-xl-6 col-md-6 col-sm-6" id="qr">
+
+                <button type="button" class="btn btn-success">Search by QR <span class="fas fa-qrcode"></span></button>
+
+            </div>
+
+            <div class="col-xl-6 col-md-6 col-sm-6" id="adv">
+
+                <div class="dropdown">
+
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+
+                        Advance Search
+
+                    </button>
+
+                    <div class="dropdown-menu">
+
+                        <a class="dropdown-item" href="#">Family Name</a>
+
+                        <a class="dropdown-item" href="#">Scientific Name</a>
+
+                        <a class="dropdown-item" href="#">Variety</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <h1>Features</h1>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="feature-box">
+
+                    <div class="feature-img">
+
+                        <img src="~/Content/home/img/test.jpg" alt="mango">
+
+                        <div class="feature-details">
+
+                            <h4>Mango</h4>
+
+                            <p>
+
+                                Mango usually available during summer.It has many uses mostly in the field of medicine.
+
+                            </p>
 
 
-<div class="container">
-    <h2>You are at Home Page.</h2>
-</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-box">
+
+                    <div class="feature-img">
+
+                        <img src="~/Content/home/img/test.jpg" alt="mango">
+
+                        <div class="feature-details">
+
+                            <h4>Mango</h4>
+
+                            <p>
+
+                                Mango usually available during summer.It has many uses mostly in the field of medicine.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-box">
+
+                    <div class="feature-img">
+
+                        <img src="~/Content/home/img/test.jpg" alt="mango">
+
+                        <div class="feature-details">
+
+                            <h4>Mango</h4>
+
+                            <p>
+
+                                Mango usually available during summer.It has many uses mostly in the field of medicine.
+
+                            </p>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="footer">
+
+    <div class="container">
+
+
+
+    </div>
+
+</section>

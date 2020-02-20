@@ -148,6 +148,11 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\home\HomeStyles.css" />
+    <Content Include="Content\home\img\home-background.jpg" />
+    <Content Include="Content\home\img\logo.png" />
+    <Content Include="Content\home\img\qr.png" />
+    <Content Include="Content\home\img\test.JPG" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
