@@ -86,62 +86,6 @@
     margin-bottom: 30px;
 }
 
-.footer {
-    padding: 5px;
-    background-image: linear-gradient(#ac8532,#21701b);
-    color: #fff;
-}
-
-.footer-logo {
-    width: 250px;
-    padding: 5px;
-}
-
-.footer a {
-    text-decoration: none;
-    padding-left: 5px;
-    color: #fff;
-}
-
-    .footer a:hover {
-        text-decoration: none;
-        color: #996f15;
-    }
-
-.footer h4 {
-    text-align: left;
-    padding-top: 15px;
-    padding-bottom: 5px;
-    font-size: 30px;
-}
-
-.footer p {
-    text-align: justify;
-    padding-top: 5px;
-    padding-right: 35px;
-    font-size: 15px;
-}
-
-.footer hr {
-    background: #fff;
-}
-
-.footer .copyright {
-    text-align: center;
-    font-size: 12px;
-}
-
-.fa-phone-square-alt {
-    margin: 0 5px;
-}
-
-.fa-envelope {
-    margin: 0 5px;
-}
-
-.fa-map-marker-alt {
-    margin: 0 5px;
-}
 
 #qr_adv {
     margin-top: 20px;
