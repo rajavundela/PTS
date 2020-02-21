@@ -1,4 +1,11 @@
 ﻿body {
     padding-top: 75px;
-    padding-bottom: 20px;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
 }

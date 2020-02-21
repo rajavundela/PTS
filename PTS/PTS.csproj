@@ -151,7 +151,6 @@
     <Content Include="Content\home\HomeStyles.css" />
     <Content Include="Content\home\img\home-background.jpg" />
     <Content Include="Content\home\img\logo.png" />
-    <Content Include="Content\home\img\qr.png" />
     <Content Include="Content\home\img\test.JPG" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
