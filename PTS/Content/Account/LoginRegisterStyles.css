@@ -61,10 +61,6 @@
     color: green;
 }
 
-
-
-
-
 a:hover {
     color: white;
 }
@@ -72,13 +68,6 @@ a:hover {
 a {
     color: green;
 }
-
-
-
-
-
-
-
 
 
 .btnForgetPwd {
@@ -104,15 +93,9 @@ a {
 }
 
 
-
-
-
 .register .nav-item {
     background-color: green;
 }
-
-
-
 
 
 label {
@@ -128,7 +111,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -149,7 +131,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -172,7 +153,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -193,7 +173,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -211,6 +190,4 @@ label {
 
 .background-loginregister {
     padding: 10%;
-    /*background-color: black;*/
-    background-image: url('~/Content/home/img/home-background.jpg');
 }
