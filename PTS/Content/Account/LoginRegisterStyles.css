@@ -61,6 +61,10 @@
     color: green;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
 a:hover {
     color: white;
 }
@@ -69,7 +73,10 @@ a {
     color: green;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
 .btnForgetPwd {
     cursor: pointer;
     margin: auto;
@@ -89,12 +96,12 @@ a {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
-    color: white;
+    color: white; 
 }
 
 
 .register .nav-item {
-    background-color: green;
+    background-color: green; 
 }
 
 
@@ -190,4 +197,12 @@ label {
 
 .background-loginregister {
     padding: 10%;
+<<<<<<< HEAD
+=======
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("../../Content/home/img/home-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+>>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
 }

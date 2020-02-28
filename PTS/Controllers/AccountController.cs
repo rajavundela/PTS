@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,23 +15,6 @@ namespace PTS.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(string username, string password)
-        {   
-            //insert login data into database
-
-            return RedirectToRoute("Home/Index");
-        }
-
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         public ActionResult LoginRegister()
         {
@@ -38,10 +22,51 @@ namespace PTS.Controllers
         }
 
         [HttpPost]
-        public void Register(string username, string password)
+        public ActionResult LoginRegister(string LoginUsername, string LoginPassword, string RegisterUsername, string RegisterEmail, string RegisterPassword)
         {
-            // insert register form data into database and send verification link
+            //creating connection
+            SqlConnection con = new SqlConnection("server=172.19.2.52;user id=group7;password=group7;database=group7");
+
+            //open connection if state is closed
+            if (con.State == System.Data.ConnectionState.Closed)
+                con.Open();
+
+            //Register
+            if (RegisterUsername != null)
+            {
+                // 1.Check if the RegisterUsername already exists in the database
+                // if exists prompt him to change username
+                //else
+                //insert data into database and send verification link
+
+                //SqlCommand cmd = new SqlCommand("");
+                //cmd.Connection = con;
+                //cmd.ExecuteNonQuery();
+
+                con.Close();
+                return RedirectToAction("RegisterSuccess");
+            }
+
+            //Login
+            else
+            {
+                //check if the LoginUsername and LoginPassword are valid and create a session
+                //SqlCommand cmd = new SqlCommand("");
+                //cmd.Connection = con;
+                //cmd.ExecuteNonQuery();
+                con.Close();
+                return Redirect("~/Home/Index");
+            }
+
+
+
+        }
+
+        
+        public ActionResult RegisterSuccess(string username, string password)
+        {
             // put a message saying registration success.
+            return View();
         }
         
         public ActionResult ForgotPassword()
