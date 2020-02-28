@@ -62,9 +62,6 @@
 }
 
 
-
-
-
 a:hover {
     color: white;
 }
@@ -72,14 +69,6 @@ a:hover {
 a {
     color: green;
 }
-
-
-
-
-
-
-
-
 
 .btnForgetPwd {
     cursor: pointer;
@@ -100,7 +89,7 @@ a {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
-    color: white;
+    color: white; 
 }
 
 
@@ -108,7 +97,7 @@ a {
 
 
 .register .nav-item {
-    background-color: green;
+    background-color: green; 
 }
 
 
@@ -128,7 +117,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -149,7 +137,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -172,7 +159,6 @@ label {
     .register {
         width: 90%;
         padding-top: 50px;
-        /* padding: 15px; */
     }
 
     .tab-pane {
@@ -211,6 +197,9 @@ label {
 
 .background-loginregister {
     padding: 10%;
-    /*background-color: black;*/
-    background-image: url('~/Content/home/img/home-background.jpg');
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("../../Content/home/img/home-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
