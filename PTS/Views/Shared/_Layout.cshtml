@@ -40,16 +40,23 @@
 
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/../Account/LoginRegister">Login <span class="fas fa-sign-in-alt"></span> / Sign Up <span class="fas fa-user-alt"></span></a>
+                        <a class="nav-link" href="~/Account/LoginRegister">Login <span class="fas fa-sign-in-alt"></span> / Sign Up <span class="fas fa-user-alt"></span></a>
                     </li>
                     @*<li class="nav-item">
-                        <a class="nav-link" href="/../Account/LoginRegister">/  Login <span class="fas fa-sign-in-alt"></span></a>
-                    </li>*@
+                            <a class="nav-link" href="/../Account/LoginRegister">/  Login <span class="fas fa-sign-in-alt"></span></a>
+                        </li>*@
                 </ul>
             </div>
 
         </div>
     </nav>
+
+    @if (ViewBag.Message != null)
+    {
+            <div class="alert alert-warning" role="alert" style="text-align:center">
+                @ViewBag.Message
+            </div>
+    }
 
     <div>
         @RenderBody()

@@ -31,9 +31,9 @@ namespace PTS.Controllers
 
             //Register
             if (RegisterUsername != null)
-            {   
-
-                
+            {
+                ViewBag.Username = RegisterUsername;
+                ViewBag.Email = RegisterEmail;
                 con.Open();
                 string query = $"SELECT userName, emailId FROM userDetails WHERE userName='{RegisterUsername}'";
                 SqlCommand cmd = new SqlCommand(query);
@@ -46,6 +46,7 @@ namespace PTS.Controllers
                 if (isExist)
                 {
                     //Error message: username already exists
+                    ViewBag.Message = "Username already exists. Enter a different one.";
                     return View();
                 }
 
@@ -60,8 +61,10 @@ namespace PTS.Controllers
                     con.Close();
 
                     //send verication link
-                    //
-                    return RedirectToAction("RegisterSuccess");
+
+                    ViewBag.Message = $"Account is created successfully with username {RegisterUsername}";
+                    //return RedirectToAction("RegisterSuccess");
+                    return View();
                 }
                 
             }
@@ -70,7 +73,9 @@ namespace PTS.Controllers
             else
             {
                 //check if the LoginUsername and LoginPassword are valid and create a session
+                ViewBag.Username = LoginUsername;
                 con.Open();
+
                 string query = $"SELECT userName, password FROM userDetails WHERE userName='{LoginUsername}'";
                 SqlCommand cmd = new SqlCommand(query);
                 cmd.Connection = con;
@@ -83,6 +88,7 @@ namespace PTS.Controllers
                     {
                         //create session here
                         //
+                        
                         con.Close();
                         return Redirect("~/Home/Index");
                     }
@@ -90,6 +96,7 @@ namespace PTS.Controllers
                     else
                     {
                         //Error: Prompt user that it is invalid password
+                        ViewBag.Message = "Invalid Password.";
                         con.Close();
                         return View();
                     }
@@ -97,6 +104,7 @@ namespace PTS.Controllers
                 else
                 {
                     //Error: Prompt User does not exist. Create an account now?
+                    ViewBag.Message = "User does not exist. Please create an account now.";
                     con.Close();
                     return View();
                 }
