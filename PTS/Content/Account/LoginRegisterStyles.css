@@ -61,22 +61,14 @@
     color: green;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
-a:hover {
+.form-group a:hover {
     color: white;
 }
 
-a {
+.form-group a {
     color: green;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
 .btnForgetPwd {
     cursor: pointer;
     margin: auto;
@@ -197,12 +189,9 @@ label {
 
 .background-loginregister {
     padding: 10%;
-<<<<<<< HEAD
-=======
     background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url("../../Content/home/img/home-background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
->>>>>>> 2bdc399bf6ef870f6d20926551cbefb2dd33af80
 }
