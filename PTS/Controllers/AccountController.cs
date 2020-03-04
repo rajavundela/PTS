@@ -25,14 +25,14 @@ namespace PTS.Controllers
         public ActionResult LoginRegister(string LoginUsername, string LoginPassword, string RegisterUsername, string RegisterEmail, string RegisterPassword)
         {
             //creating connection for infotech group7 databse
-            //SqlConnection con = new SqlConnection("server=172.19.2.52;user id=group7;password=group7;database=group7");
-            SqlConnection con = new SqlConnection("server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts");
+            SqlConnection con = new SqlConnection("server=172.19.2.52;user id=group7;password=group7;database=group7");
+            //SqlConnection con = new SqlConnection("server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts");
 
 
             //Register
             if (RegisterUsername != null)
             {
-                ViewBag.Username = RegisterUsername;
+                ViewBag.RegisterUsername = RegisterUsername;
                 ViewBag.Email = RegisterEmail;
                 con.Open();
                 string query = $"SELECT userName, emailId FROM userDetails WHERE userName='{RegisterUsername}'";
@@ -46,7 +46,7 @@ namespace PTS.Controllers
                 if (isExist)
                 {
                     //Error message: username already exists
-                    ViewBag.Message = "Username already exists. Enter a different one.";
+                    TempData["Message"] = "Username already exists. Enter a different one.";
                     return View();
                 }
 
@@ -62,7 +62,7 @@ namespace PTS.Controllers
 
                     //send verication link
 
-                    ViewBag.Message = $"Account is created successfully with username {RegisterUsername}";
+                    TempData["Message"] = $"Account is created successfully with username {RegisterUsername}";
                     //return RedirectToAction("RegisterSuccess");
                     return View();
                 }
@@ -73,7 +73,7 @@ namespace PTS.Controllers
             else
             {
                 //check if the LoginUsername and LoginPassword are valid and create a session
-                ViewBag.Username = LoginUsername;
+                ViewBag.LoginUsername = LoginUsername;
                 con.Open();
 
                 string query = $"SELECT userName, password FROM userDetails WHERE userName='{LoginUsername}'";
@@ -88,6 +88,7 @@ namespace PTS.Controllers
                     {
                         //create session here
                         //
+                        TempData["Message"] = $"Welcome {LoginUsername}..!";
                         
                         con.Close();
                         return Redirect("~/Home/Index");
@@ -96,7 +97,7 @@ namespace PTS.Controllers
                     else
                     {
                         //Error: Prompt user that it is invalid password
-                        ViewBag.Message = "Invalid Password.";
+                        TempData["Message"] = "Invalid Password.";
                         con.Close();
                         return View();
                     }
@@ -104,7 +105,7 @@ namespace PTS.Controllers
                 else
                 {
                     //Error: Prompt User does not exist. Create an account now?
-                    ViewBag.Message = "User does not exist. Please create an account now.";
+                    TempData["Message"] = "User does not exist. Please create an account now.";
                     con.Close();
                     return View();
                 }
@@ -115,12 +116,6 @@ namespace PTS.Controllers
 
         }
 
-        
-        public ActionResult RegisterSuccess(string username, string password)
-        {
-            // put a message saying registration success.
-            return View();
-        }
         
         public ActionResult ForgotPassword()
         {
