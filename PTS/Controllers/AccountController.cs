@@ -11,7 +11,13 @@ namespace PTS.Controllers
     {
         // GET: Account
         public ActionResult Index()
-        {
+        {   
+            if(Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+
             return View();
         }
 
@@ -63,7 +69,6 @@ namespace PTS.Controllers
                     //send verication link
 
                     TempData["Message"] = $"Account is created successfully with username {RegisterUsername}";
-                    //return RedirectToAction("RegisterSuccess");
                     return View();
                 }
                 
@@ -79,7 +84,7 @@ namespace PTS.Controllers
                 string query = $"SELECT userName, password FROM userDetails WHERE userName='{LoginUsername}'";
                 SqlCommand cmd = new SqlCommand(query);
                 cmd.Connection = con;
-                // Executing query
+                // Executing query 
                 SqlDataReader sdr = cmd.ExecuteReader();
 
                 if (sdr.Read())
@@ -88,6 +93,8 @@ namespace PTS.Controllers
                     {
                         //create session here
                         //
+                        Session["Username"] = LoginUsername;
+
                         TempData["Message"] = $"Welcome {LoginUsername}..!";
                         
                         con.Close();
@@ -111,9 +118,13 @@ namespace PTS.Controllers
                 }
                 
             }
+        }
 
-
-
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            TempData["Message"] = "You have been logged out. Looking forward to see you again.";
+            return RedirectToAction("Index", "Home");
         }
 
         
@@ -125,6 +136,7 @@ namespace PTS.Controllers
         public ActionResult Verify(string id)
         {   //if the id is correct put success, else no success
             //put sucess or no success flags in ViewBag
+
             return View();
         }
 
