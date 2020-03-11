@@ -144,6 +144,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Account\AccountStyles.css" />
     <Content Include="Content\Account\LoginRegisterStyles.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -155,6 +156,7 @@
     <Content Include="Content\home\img\home-background.jpg" />
     <Content Include="Content\home\img\logo.png" />
     <Content Include="Content\home\img\test.JPG" />
+    <Content Include="Content\Media\ProfileImages\DefaultImage.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -297,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Media\PlantImages\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,82 @@
+﻿.user {
+    padding: 100px 0;
+}
+
+    .user h1 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+.user-img img {
+    width: 100%;
+}
+
+.user-img {
+    padding-top: 30px;
+    position: relative;
+    border-radius: 50%;
+}
+
+.user-details {
+    padding: 20px;
+    text-align: justify;
+}
+
+    .user-details h4 {
+        font-weight: 600;
+        margin-top: 20px;
+    }
+
+/* .user-box{
+
+    margin-top: 20px;
+
+    box-shadow: 0 8px 6px -6px black;
+
+    margin-bottom: 30px;
+
+} */
+
+#user {
+    margin-top: -40px;
+    padding-top: -250px;
+    background-color: #efefef;
+}
+
+#user-box {
+    box-shadow: 3px 3px 5px 6px #ccc;
+    margin-bottom: 30px;
+    padding: 2%;
+}
+
+.user-blog {
+    border-radius: 5px;
+    padding-left: 2%;
+    text-align: justify;
+    padding-top: 20px;
+    background: #beccbe;
+    margin: 1%;
+}
+
+.content {
+    padding: 16px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.comment {
+    margin: 2%;
+}
+
+
+
+    .comment textarea {
+        margin-bottom: 2%;
+        display: block;
+        width: 100%;
+    }
+
+.btn-box {
+    margin: 4%;
+    margin-right: 15%;
+}

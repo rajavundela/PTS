@@ -1,1 +1,158 @@
-﻿<h1>Account details</h1>
+﻿@{
+    ViewBag.Title = "My Account";
+}
+
+@section HeadContent
+{
+    <link href="~/Content/Account/AccountStyles.css" rel="stylesheet"/>
+}
+<section class="user" id="user">
+
+    <h1>Details</h1>
+
+    <div class="container">
+
+        <div class="container" id="user-box">
+
+            <div class="row">
+
+                <div class="col-md-2">
+
+                    <div class="user-box">
+
+                        <div class="user-img">
+
+                            <img src="~/Content/Media/ProfileImages/DefaultImage.png" class="rounded-circle">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-10">
+
+                    <div class="user-details">
+
+                        <h3>Name</h3>
+
+                        <hr>
+
+                        <p>
+
+                            <i class="far fa-envelope" style="width:30px;"></i>email@example.com
+
+                            <br />
+
+                        </p>
+
+                        <hr>
+
+                        <a href="#">Change Password</a>
+
+                        <hr>
+
+                        <form method="post" enctype="multipart/form-data">
+
+                            <div>
+
+                                <label for="profile_pic">Upload Profile Picture</label>
+
+                                <input type="file" id="profile_pic" name="profile_pic"
+                                       accept=".jpg, .jpeg, .png">
+
+                            </div>
+
+                            <div>
+
+                                <button>Submit</button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="user-blog">
+
+                <h4>Blog Details</h4><br />
+
+            </div>
+
+            <div class="content">
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+                <p>Name of the blog and date will be displayed here.</p>
+
+            </div>
+
+            <form>
+
+                <div class="user-blog">
+
+                    <h4>Comment</h4><br />
+
+                </div>
+
+                <div class="comment">
+
+                    <label for="comment" class="required">Comment/Suggestion</label>
+
+                    <textarea name="comment" id="comment" rows="10" tabindex="4" required="required"></textarea>
+
+                    <input name="submit" type="submit" value="Submit comment" />
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
