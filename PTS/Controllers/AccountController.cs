@@ -63,12 +63,20 @@ namespace PTS.Controllers
                     query = $"insert into userDetails(userName, emailId, password) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}')";
                     SqlCommand cmd2 = new SqlCommand(query);
                     cmd2.Connection = con;
-                    cmd2.ExecuteNonQuery();
+                    try
+                    {
+                        cmd2.ExecuteNonQuery();
+                        TempData["Message"] = $"Account is created successfully with username {RegisterUsername}.";
+                    }
+
+                    catch (SqlException ex)
+                    {
+                        TempData["Message"] = "An account with that email already exists.";
+                    }
                     con.Close();
 
                     //send verication link
 
-                    TempData["Message"] = $"Account is created successfully with username {RegisterUsername}";
                     return View();
                 }
                 
