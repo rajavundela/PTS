@@ -295,7 +295,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Plant\Index.cshtml" />
     <Content Include="Views\Account\LoginRegister.cshtml" />
-    <Content Include="Views\Shared\LoginRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

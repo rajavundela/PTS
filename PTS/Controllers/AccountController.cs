@@ -60,7 +60,7 @@ namespace PTS.Controllers
                 {   
                     //insert data into database
                     con.Open();
-                    query = $"insert into userDetails(userName, emailId, password) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}')";
+                    query = $"insert into userDetails(userName, emailId, password, dateCreated) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}','{DateTime.Now.ToString("yyy-MM-dd hh:mm:ss")}')";
                     SqlCommand cmd2 = new SqlCommand(query);
                     cmd2.Connection = con;
                     try
