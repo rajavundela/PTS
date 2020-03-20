@@ -31,8 +31,8 @@ namespace PTS.Controllers
         public ActionResult LoginRegister(string LoginUsername, string LoginPassword, string RegisterUsername, string RegisterEmail, string RegisterPassword)
         {
             //creating connection for infotech group7 databse
-            SqlConnection con = new SqlConnection("server=172.19.2.52;user id=group7;password=group7;database=group7");
-            //SqlConnection con = new SqlConnection("server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts");
+            //SqlConnection con = new SqlConnection("server=172.19.2.52;user id=group7;password=group7;database=group7");
+            SqlConnection con = new SqlConnection("server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts");
 
 
             //Register
