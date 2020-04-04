@@ -1,0 +1,10 @@
+﻿.search-display-tile{
+    margin:2px;
+    padding:5px;
+    color:rgb(221, 221, 228);
+    background-color:rgb(21, 68, 28);
+}
+
+.search-display-tile a{
+    color:rgb(240, 226, 146);
+}

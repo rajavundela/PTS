@@ -295,11 +295,45 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Plant\Index.cshtml" />
     <Content Include="Views\Account\LoginRegister.cshtml" />
+    <Content Include="Views\Plant\Search.cshtml" />
+    <Content Include="Content\Plant\SearchStyles.css" />
+    <None Include="Content\fontawesome-free-5.13.0-web\LICENSE.txt" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\all.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\v4-shims.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\brands.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\solid.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\brands.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\regular.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\all.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\svg-with-js.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\v4-shims.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\fontawesome.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\svg-with-js.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\regular.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\fontawesome.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\css\solid.min.css" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.svg" />
+    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.ttf" />
+    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.woff2" />
+    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.eot" />
+    <Content Include="Views\Plant\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Media\PlantImages\" />
     <Folder Include="Models\" />
+    <Folder Include="Content\Plant\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -340,6 +374,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

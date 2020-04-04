@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home";
 }
 
 @section HeadContent
@@ -12,11 +12,11 @@
 
     <h1>Discover what's out there</h1>
 
-    <form>
+    <form action="/Plant/Search">
 
         <div class="input-group">
 
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" name="searchString" class="form-control" placeholder="Search with keywords" required>
 
             <div class="input-group-append">
 

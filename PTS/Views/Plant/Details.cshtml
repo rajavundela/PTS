@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Plant Details";
+}
+
+<section class="container" id="details">
+    <center><h2>Details</h2></center>
+    <div class="bs-example">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" id="img-container-block">
+                    <img src="./img/plant.jpg" alt="First image" id="img-box">
+                </div>
+                <div class="carousel-item" id="img-container-block">
+                    <img src="./img/plant.jpg" alt="Second image" id="img-box">
+                </div>
+                <div class="carousel-item" id="img-container-block">
+                    <img src="./img/plant.jpg" alt="Third image" id="img-box">
+                </div>
+            </div>
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <td>Family Name</td>
+            <td>@ViewBag.FamilyName</td>
+        </tr>
+        <tr class="table-success">
+            <td>Family Common name</td>
+            <td>@ViewBag.FamilyCommonName</td>
+        </tr>
+        <tr>
+            <td>Habitat</td>
+            <td>@ViewBag.Habitat</td>
+        </tr>
+        <tr class="table-success">
+            <td>Common Name</td>
+            <td>@ViewBag.CommonName</td>
+        </tr>
+        <tr>
+            <td>Botanical Name</td>
+            <td>@ViewBag.BotanicalName</td>
+        </tr>
+        <tr class="table-success">
+            <td>Chromosome Number</td>
+            <td>@ViewBag.ChromosomeNo</td>
+        </tr>
+        <tr>
+            <td>Genus</td>
+            <td>@ViewBag.Genus</td>
+        </tr>
+        <tr class="table-success">
+            <td>Species</td>
+            <td>@ViewBag.Species</td>
+        </tr>
+        <tr>
+            <td>Uses</td>
+            <td>@ViewBag.Uses</td>
+        </tr>
+        <tr class="table-success">
+            <td>Medical Benefit</td>
+            <td>@ViewBag.MedicalBenefit</td>
+        </tr>
+        <tr>
+            <td>Health Hazard</td>
+            <td>@ViewBag.HealthHazard</td>
+        </tr>
+        <tr class="table-success">
+            <td>Variety Name</td>
+            <td>@ViewBag.VarietyName</td>
+        </tr>
+        <tr>
+            <td>Nature</td>
+            <td>@ViewBag.Nature</td>
+        </tr>
+        <tr class="table-success">
+            <td>Time of Setting</td>
+            <td>@ViewBag.TimeOfSetting</td>
+        </tr>
+        <tr>
+            <td>Time of Flowering</td>
+            <td>@ViewBag.TimeOfFlowering</td>
+        </tr>
+        <tr class="table-success">
+            <td>Rotation Period</td>
+            <td>@ViewBag.RotationPeriod</td>
+        </tr>
+        <tr>
+            <td>Propagation Method</td>
+            <td>@ViewBag.PropagationMethod</td>
+        </tr>
+        <tr class="table-success">
+            <td>Tree Height</td>
+            <td>@ViewBag.TreeHeight</td>
+        </tr>
+        <tr>
+            <td>Trunk colour</td>
+            <td>@ViewBag.TrunkColor</td>
+        </tr>
+        <tr class="table-success">
+            <td>Tree Form</td>
+            <td>@ViewBag.TreeForm</td>
+        </tr>
+        <tr>
+            <td>Leaf Shape</td>
+            <td>@ViewBag.LeafShape</td>
+        </tr>
+        <tr class="table-success">
+            <td>Fragrance</td>
+            <td>@ViewBag.Fragrance</td>
+        </tr>
+        <tr>
+            <td>Wood Character</td>
+            <td>@ViewBag.WoodCharacter</td>
+        </tr>
+        <tr class="table-success">
+            <td>Fruit Type</td>
+            <td>@ViewBag.FruitType</td>
+        </tr>
+        <tr>
+            <td>Bark Colour</td>
+            <td>@ViewBag.BarkColor</td>
+        </tr>
+        <tr class="table-success">
+            <td>Bark Texture</td>
+            <td>@ViewBag.BarkTexture</td>
+        </tr>
+        <tr>
+            <td>Litter Type</td>
+            <td>@ViewBag.LitterType</td>
+        </tr>
+        <tr class="table-success">
+            <td>Longevity</td>
+            <td>@ViewBag.Longevity</td>
+        </tr>
+        <tr>
+            <td>Growing Conditions</td>
+            <td>@ViewBag.GrowingCondition</td>
+        </tr>
+        <tr class="table-success">
+            <td>Date of Planting</td>
+            <td>@ViewBag.DateOfPlanting</td>
+        </tr>
+        <tr>
+            <td>Location of Plant</td>
+            <td>@ViewBag.LocationOfPlant</td>
+        </tr>
+    </table>
+</section>
+
+

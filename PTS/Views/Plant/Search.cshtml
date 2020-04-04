@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = $"{ViewBag.Searchstring} - Search";
+    var count = ViewBag.SearchResults.Count;//number of results
+}
+
+@section Headcontent{
+    <link href="~/Content/home/HomeStyles.css" rel="stylesheet" />
+    <link href="~/Content/Plant/SearchStyles.css" rel="stylesheet" />
+}
+
+<div class="mine">
+    <form>
+
+        <div class="input-group">
+
+            <input type="text" name="searchString" class="form-control" placeholder="Search with keywords" value="@ViewBag.SearchString" required>
+
+            <div class="input-group-append">
+
+                <button type="submit" class="input-group-text btn">Search</button>
+
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+<div class="container">
+    <h6>About @count results were found.</h6>
+    <div class="row">
+        @for (var i = 0; i < count; i++)
+        {
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 search-display-tile">
+
+            <p><a href="/Plant/Details/@ViewBag.SearchResults[i][4]">Botanical Name: @ViewBag.SearchResults[i][0]</a></p>
+            <p>Common Name: @ViewBag.SearchResults[i][1]</p>
+            <p>Family: @ViewBag.SearchResults[i][2]</p>
+            <p>Variety: @ViewBag.SearchResults[i][3]</p>
+            <p>Location: @ViewBag.SearchResults[i][5]</p>
+            <p>Date Planted:@ViewBag.SearchResults[i][6]</p>
+
+        </div>
+        }
+    </div>
+</div>
+
+
+
+
