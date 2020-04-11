@@ -60,7 +60,7 @@ namespace PTS.Controllers
                 {   
                     //insert data into database
                     con.Open();
-                    query = $"insert into userDetails(userName, emailId, password, dateCreated) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}','{DateTime.Now.ToString("yyy-MM-dd hh:mm:ss")}')";
+                    query = $"insert into userDetails(userName, emailId, password, dateCreated) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}','{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")}')";
                     SqlCommand cmd2 = new SqlCommand(query);
                     cmd2.Connection = con;
                     try
@@ -89,7 +89,7 @@ namespace PTS.Controllers
                 ViewBag.LoginUsername = LoginUsername;
                 con.Open();
 
-                string query = $"SELECT userName, password FROM userDetails WHERE userName='{LoginUsername}'";
+                string query = $"SELECT userName, password, Role_Id FROM userDetails WHERE userName='{LoginUsername}'";
                 SqlCommand cmd = new SqlCommand(query);
                 cmd.Connection = con;
                 // Executing query 
@@ -100,8 +100,8 @@ namespace PTS.Controllers
                     if (sdr["userName"].ToString() == LoginUsername && sdr["password"].ToString() == LoginPassword)
                     {
                         //create session here
-                        //
                         Session["Username"] = LoginUsername;
+                        Session["UserType"] = sdr["Role_Id"].ToString();
 
                         TempData["Message"] = $"Welcome {LoginUsername}..!";
                         

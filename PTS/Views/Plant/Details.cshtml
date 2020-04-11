@@ -3,7 +3,7 @@
 }
 
 <section class="container" id="details">
-    <center><h2>Details</h2></center>
+    <center><h2>Plant Details</h2></center>
     <div class="bs-example">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Carousel indicators -->
@@ -159,6 +159,13 @@
             <td>@ViewBag.LocationOfPlant</td>
         </tr>
     </table>
+    @if(Session["Username"] != null){
+        if(Session["UserType"].Equals("2"))
+        {
+            <p><a class="btn btn-outline-primary" href="/Plant/Edit/@ViewBag.Id">Edit Plant Details</a></p>
+        }
+    }
 </section>
+
 
 

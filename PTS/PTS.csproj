@@ -328,6 +328,7 @@
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.eot" />
     <Content Include="Views\Plant\Details.cshtml" />
+    <Content Include="Views\Plant\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
