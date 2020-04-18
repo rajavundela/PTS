@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Add Location & Date";
+}
+
+@section HeadContent{
+    <link href="/Content/Plant/AdminFormsStyles.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/Plant/AddLocationDate.js"></script>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+
+                <center><h1>Location and Date Details</h1></center>
+                <hr>
+
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+                    <div class="form-group">
+                        <label>Date of Planting *</label>
+                        <input type="text" class="form-control" Name="dateOfPlanting" placeholder="yyyy-mm-dd" required>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location(Nearest Block) *</label>
+                        <input type="text" class="form-control" Name="location" placeholder="Enter Location" required>
+                        <div class="valid-feedback"></div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+
+                    <div class="danger">
+                        <p><strong> Note: </strong>Plant images upload will be enabled in next update.</p>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="plantImage1">Upload Image 1 </label>
+                        <input type="file" id="plantImage1" name="plantImage1" accept=".jpg, .jpeg, .png" disabled>
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="plantImage2">Upload Image 2 </label>
+                        <input type="file" id="plantImage2" name="plantImage2" accept=".jpg, .jpeg, .png" disabled>
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="plantImage3">Upload Image 3 </label>
+                        <input type="file" id="plantImage3" name="plantImage3" accept=".jpg, .jpeg, .png" disabled>
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+
+                    <div class="btn-box">
+                        <button type="submit" id="btnSubmit" class="btn btn-success">Submit & Generate QR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

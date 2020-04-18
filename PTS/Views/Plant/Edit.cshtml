@@ -5,10 +5,10 @@
 
 <div class="container">
     <center><h2>Edit Plant Details</h2></center>
-    <form method="post">
+    <form class="needs-validation" method="post" novalidate>
         <div class="form-group">
-            <label for="FamilyName">FamilyName:</label>
-            <input type="text" class="form-control" id="FamilyName" name="FamilyName" value="@ViewBag.FamilyName">
+            <label for="FamilyName">FamilyName: *</label>
+            <input type="text" class="form-control" id="FamilyName" name="FamilyName" value="@ViewBag.FamilyName" required>
         </div>
         <div class="form-group">
             <label for="FamilyCommonName">FamilyCommonName:</label>
@@ -19,16 +19,16 @@
             <input type="text" class="form-control" id="Habitat" name="Habitat" value="@ViewBag.Habitat">
         </div>
         <div class="form-group">
-            <label for="CommonName">CommonName:</label>
-            <input type="text" class="form-control" id="CommonName" name="CommonName" value="@ViewBag.CommonName">
+            <label for="CommonName">CommonName: *</label>
+            <input type="text" class="form-control" id="CommonName" name="CommonName" value="@ViewBag.CommonName" required>
         </div>
         <div class="form-group">
-            <label for="BotanicalName">BotanicalName:</label>
-            <input type="text" class="form-control" id="BotanicalName" name="BotanicalName" value="@ViewBag.BotanicalName">
+            <label for="BotanicalName">BotanicalName: *</label>
+            <input type="text" class="form-control" id="BotanicalName" name="BotanicalName" value="@ViewBag.BotanicalName" required>
         </div>
         <div class="form-group">
-            <label for="ChromosomeNo">ChromosomeNo:</label>
-            <input type="number" class="form-control" id="ChromosomeNo" name="ChromosomeNo" value="@ViewBag.ChromosomeNo">
+            <label for="ChromosomeNo">ChromosomeNo: *</label>
+            <input type="number" class="form-control" id="ChromosomeNo" name="ChromosomeNo" value="@ViewBag.ChromosomeNo" required>
         </div>
         <div class="form-group">
             <label for="Genus">Genus:</label>
@@ -51,12 +51,12 @@
             <input type="text" class="form-control" id="HealthHazard" name="HealthHazard" value="@ViewBag.HealthHazard">
         </div>
         <div class="form-group">
-            <label for="VarietyName">VarietyName:</label>
-            <input type="text" class="form-control" id="VarietyName" name="VarietyName" value="@ViewBag.VarietyName">
+            <label for="VarietyName">VarietyName: *</label>
+            <input type="text" class="form-control" id="VarietyName" name="VarietyName" value="@ViewBag.VarietyName" required>
         </div>
         <div class="form-group">
-            <label for="Nature">Nature:</label>
-            <input type="text" class="form-control" id="Nature" name="Nature" value="@ViewBag.Nature">
+            <label for="Nature">Nature: *</label>
+            <input type="text" class="form-control" id="Nature" name="Nature" value="@ViewBag.Nature" required>
         </div>
         <div class="form-group">
             <label for="TimeOfSetting">TimeOfSetting:</label>

@@ -142,6 +142,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\PlantApiController.cs" />
+    <Compile Include="Controllers\FamilyApiController.cs" />
+    <Compile Include="Controllers\VarietyApiController.cs" />
+    <Compile Include="Controllers\LocationDateApiController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Account\AccountStyles.css" />
@@ -329,12 +333,22 @@
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.eot" />
     <Content Include="Views\Plant\Details.cshtml" />
     <Content Include="Views\Plant\Edit.cshtml" />
+    <Content Include="Content\Plant\AdminFormsStyles.css" />
+    <Content Include="Scripts\Plant\AddPlant.js" />
+    <Content Include="Views\Plant\AddFamily.cshtml" />
+    <Content Include="Scripts\Plant\AddFamily.js" />
+    <Content Include="Scripts\Plant\AddVariety.js" />
+    <Content Include="Views\Plant\AddPlant.cshtml" />
+    <Content Include="Views\Plant\AddVariety.cshtml" />
+    <Content Include="Views\Plant\AddLocationDate.cshtml" />
+    <Content Include="Scripts\Plant\AddLocationDate.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Media\PlantImages\" />
     <Folder Include="Models\" />
     <Folder Include="Content\Plant\" />
+    <Folder Include="Scripts\Plant\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Add Variety";
+}
+
+@section HeadContent{
+    <link href="/Content/Plant/AdminFormsStyles.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/Plant/AddVariety.js"></script>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+
+                <center><h1>Variety Details</h1></center>
+                <hr>
+
+                <form method="post" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <input class="form-control" id="varietySearch" list="varietyList" placeholder="Enter variety name" value="" />
+                        <datalist id="varietyList">
+                            @for (int i = 0; i < ViewBag.VarietyList.Count; i++)
+                            {
+                                <option value="@ViewBag.VarietyList[i]"></option>
+                            }
+                        </datalist>
+                    </div>
+                    <a id="varietySearchButton" class="btn btn-outline-secondary"><i class="fas fa-search"></i> Search</a>
+                    <br />
+                    <br />
+                    <div id="varietyForm" hidden>
+                        <div class="form-group">
+                            <label>Variety Name *</label>
+                            <input type="text" class="form-control" id="varietyName" Name="varietyName" required readonly>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nature *</label>
+                            <input type="text" class="form-control" id="nature" Name="nature" required disabled>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Time of Seed Setting</label>
+                            <input type="text" class="form-control" id="timeOfSetting" Name="timeOfSetting" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Time of Flowering</label>
+                            <input type="text" class="form-control" id="timeOfFlowering" Name="timeOfFlowering" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Rotation Period</label>
+                            <input type="text" class="form-control" id="rotationPeriod" Name="rotationPeriod" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Propagation Method</label>
+                            <input type="text" class="form-control" id="propagationMethod" Name="propagationMethod" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tree/Plant Height</label>
+                            <input type="number" class="form-control" id="treeHeight" Name="treeHeight" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Trunk/Stem Colour</label>
+                            <input type="text" class="form-control" id="trunkColour" Name="trunkColour" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tree Form</label>
+                            <input type="text" class="form-control" id="treeForm" Name="treeForm" disabled>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Leaf Shape</label>
+                            <input type="text" class="form-control" id="leafShape" Name="leafShape" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Fragrance</label>
+                            <input type="text" class="form-control" id="fragrance" Name="fragrance" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Wood Character</label>
+                            <input type="text" class="form-control" id="woodCharacter" Name="woodCharacter" disabled>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Fruit Type</label>
+                            <input type="text" class="form-control" id="fruitType" Name="fruitType" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bark Colour</label>
+                            <input type="text" class="form-control" id="barkColour" Name="barkColour" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bark Texture</label>
+                            <input type="text" class="form-control" id="barkTexture" Name="barkTexture" disabled>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Litter Type</label>
+                            <input type="text" class="form-control" id="litterType" Name="litterType" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Longetivity</label>
+                            <input type="text" class="form-control" id="longetivity" Name="longetivity" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Growing Conditions</label>
+                            <input type="text" class="form-control" id="growingConditions" Name="growingConditions" disabled>
+                        </div>
+
+                        <div class="btn-box">
+                            <button type="submit" id="varietyInsert" class="btn btn-success" hidden>Submit <i class="fas fa-paper-plane"></i></button>
+                            <a id="varietySelect" class="admin-btn" href="" hidden>Location <i class="fas fa-forward"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</section>

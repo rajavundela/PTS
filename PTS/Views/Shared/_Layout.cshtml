@@ -8,7 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
     <!--font awesome script for icons-->
     <link href="~/Content/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
-    @RenderSection("HeadContent", required:false)
+    <script src="/Scripts/site.js"></script>
+    @RenderSection("HeadContent", required: false)
+
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-light navbar-light fixed-top">
@@ -47,11 +49,27 @@
                     }
                     else
                     {
+                        if (Session["UserType"].Equals("2"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-light" href="#" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Navigation</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDevelopmentDropdown">
+                                    <div class="dropdown-header">Admin</div>
+                                    <a class="dropdown-item" href="#">Add Admin</a>
+                                    <a class="dropdown-item" href="#">Delete Admin</a>
+                                    <div class="dropdown-divider"></div>
+
+                                    <div class="dropdown-header">Plants</div>
+                                    <a class="dropdown-item" href="/Plant/AddFamily/">Insert Details</a>
+                                    <a class="dropdown-item" href="#">Delete Details</a>
+                                </div>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link" href="~/Account/Index"><strong>@Session["Username"] </strong><span class="fas fa-user-circle"></span></a>
+                            <a class="nav-link btn btn-light" href="~/Account/Index"><strong>@Session["Username"] </strong><span class="fas fa-user-circle"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="~/Account/Logout">Logout <span class="fas fa-sign-out-alt"></span></a>
+                            <a class="nav-link btn btn-light" href="~/Account/Logout">Logout <span class="fas fa-sign-out-alt"></span></a>
                         </li>
 
                     }

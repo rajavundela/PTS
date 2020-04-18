@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Add Plant";
+}
+
+@section HeadContent{
+    <link href="/Content/Plant/AdminFormsStyles.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/Plant/AddPlant.js"></script>
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr><center><h1>Plant Details</h1></center><hr>
+                <form class="needs-validation" method="post" novalidate>
+
+                    <div class="form-group">
+                        <input class="form-control" id="plantSearch" list="plantList" placeholder="Enter botanical name" value="" />
+                        <datalist id="plantList">
+                            @for (int i = 0; i < ViewBag.PlantList.Count; i++)
+                            {
+                                <option value="@ViewBag.PlantList[i]"></option>
+                            }
+                        </datalist>
+                    </div>
+                    <a id="plantSearchButton" class="btn btn-outline-secondary"><i class="fas fa-search"></i> Search</a>
+                    <br />
+                    <br />
+                    <div id="plantForm" hidden>
+                        <div class="form-group">
+                            <label>Botanical Name *</label>
+                            <input type="text" class="form-control" id="botanicalName" Name="botanicalName" value="" required readonly>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Common Name *</label>
+                            <input type="text" class="form-control" id="commonName" Name="commonName" required disabled>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chromosome Number *</label>
+                            <input type="number" class="form-control" id="chromosomeNo" Name="chromosomeNo" required disabled>
+                            <div class="valid-feedback"></div>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Genus</label>
+                            <input type="text" class="form-control" id="genus" Name="genus" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Species</label>
+                            <input type="text" class="form-control" id="species" Name="species" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Uses</label>
+                            <input type="text" class="form-control" id="uses" Name="uses" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Medical Benefits</label>
+                            <input type="text" class="form-control" id="medicalBenefits" Name="medicalBenefits" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Health Hazards</label>
+                            <input type="text" class="form-control" id="healthHazards" Name="healthHazards" disabled>
+                        </div>
+
+                        <div class="btn-box">
+                            <button type="submit" id="plantInsert" class="btn btn-success" hidden>Submit <i class="fas fa-paper-plane"></i></button>
+                            <a id="plantSelect" class="admin-btn" href="" hidden>Variety <i class="fas fa-forward"></i></a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

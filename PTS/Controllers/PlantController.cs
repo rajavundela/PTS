@@ -253,5 +253,250 @@ namespace PTS.Controllers
             TempData["Message"] = "Sucessfully updated.";
             return Redirect($"/Plant/Details/{id}");
         }
+
+        [HttpGet]
+        public ActionResult AddFamily()
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "select FamilyName from FamilyMaster";
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                var familyList = new List<string>();
+                while (reader.Read())
+                {
+                    familyList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.FamilyList = familyList;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddFamily(FormCollection values)
+        {
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Insert_Admin_FamilyDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@FamilyName", values["familyName"]));
+                cmd.Parameters.Add(new SqlParameter("@FamilyCommonName", values["familyCommonName"]));
+                cmd.Parameters.Add(new SqlParameter("@Habitat", values["habitat"]));
+                cmd.Parameters.Add(new SqlParameter("@entryby", Session["Username"]));
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                TempData["Message"] = "Family Details inserted successfully";
+
+                //for populating suggestions
+                string query = "select FamilyName from FamilyMaster";
+                cmd = new SqlCommand(query, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                var familyList = new List<string>();
+                while (reader.Read())
+                {
+                    familyList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.FamilyList = familyList;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddPlant(int familyId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "select Botonical_Name from PlantMaster where Family_Id="+familyId;
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                var plantList = new List<string>();
+                while (reader.Read())
+                {
+                    plantList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.PlantList = plantList;
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPlant(int familyId, FormCollection values)
+        {
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Insert_Admin_PlantDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Family_Id", familyId));
+                cmd.Parameters.Add(new SqlParameter("@Common_Name", values["commonName"]));
+                cmd.Parameters.Add(new SqlParameter("@Botonical_Name", values["botanicalName"]));
+                cmd.Parameters.Add(new SqlParameter("@Chromosome_No", values["chromosomeNo"]));
+                cmd.Parameters.Add(new SqlParameter("@Genus", values["genus"]));
+                cmd.Parameters.Add(new SqlParameter("@Species", values["species"]));
+                cmd.Parameters.Add(new SqlParameter("@Uses", values["uses"]));
+                cmd.Parameters.Add(new SqlParameter("@Medical_Benefit", values["medicalBenefits"]));
+                cmd.Parameters.Add(new SqlParameter("@Health_Hazard", values["healthHazards"]));
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                TempData["Message"] = "Plant Details inserted successfully";
+
+                //for populating suggestions
+
+                string query = "select Botonical_Name from PlantMaster where Family_Id=" + familyId;
+                cmd = new SqlCommand(query, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                var plantList = new List<string>();
+                while (reader.Read())
+                {
+                    plantList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.PlantList = plantList;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddVariety(int familyId, int plantId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "select Variety_Name from VarietyMaster where Plant_Id=" + plantId;
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                var varietyList = new List<string>();
+                while (reader.Read())
+                {
+                    varietyList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.VarietyList = varietyList;
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddVariety(int familyId, int plantId, FormCollection values)
+        {
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Insert_Admin_VarietyDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Plant_Id", plantId));
+                cmd.Parameters.Add(new SqlParameter("@Variety_Name", values["varietyName"]));
+                cmd.Parameters.Add(new SqlParameter("@Nature", values["nature"]));
+                cmd.Parameters.Add(new SqlParameter("@TimeOfSetting", values["timeOfSetting"]));
+                cmd.Parameters.Add(new SqlParameter("@TimeOfFlowering", values["timeOfFlowering"]));
+                cmd.Parameters.Add(new SqlParameter("@Rotation_Period", values["rotationPeriod"]));
+                cmd.Parameters.Add(new SqlParameter("@Propagation_Method", values["propagationMethod"]));
+                cmd.Parameters.Add(new SqlParameter("@Tree_Height", values["treeHeight"]));
+                cmd.Parameters.Add(new SqlParameter("@Trunk_Color", values["trunkColour"]));
+                cmd.Parameters.Add(new SqlParameter("@Tree_Form", values["treeForm"]));
+                cmd.Parameters.Add(new SqlParameter("@Leaf_shape", values["leafShape"]));
+                cmd.Parameters.Add(new SqlParameter("@fragrance", values["fragrance"]));
+                cmd.Parameters.Add(new SqlParameter("@wood_character", values["woodCharacter"]));
+                cmd.Parameters.Add(new SqlParameter("@fruit_type", values["fruitType"]));
+                cmd.Parameters.Add(new SqlParameter("@bark_color", values["barkColour"]));
+                cmd.Parameters.Add(new SqlParameter("@bark_texture", values["barkTexture"]));
+                cmd.Parameters.Add(new SqlParameter("@litter_type", values["litterType"]));
+                cmd.Parameters.Add(new SqlParameter("@longevity", values["longetivity"]));
+                cmd.Parameters.Add(new SqlParameter("@growing_condition ", values["growingConditions"]));
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                TempData["Message"] = "Variety Details inserted successfully";
+
+                //for populating suggestions
+
+                string query = "select Variety_Name from VarietyMaster where Plant_Id=" + plantId;
+                cmd = new SqlCommand(query, con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                var varietyList = new List<string>();
+                while (reader.Read())
+                {
+                    varietyList.Add(reader[0].ToString());
+                }
+                reader.Close();
+                ViewBag.VarietyList = varietyList;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddLocationDate(int plantId, int varietyId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddLocationDate(int plantId, int varietyId, FormCollection values)
+        {
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Insert_Admin_LocationDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Plant_Id", plantId));
+                cmd.Parameters.Add(new SqlParameter("@Variety_Id", varietyId));
+                cmd.Parameters.Add(new SqlParameter("@DateOfPlanting", values["dateOfPlanting"]));
+                cmd.Parameters.Add(new SqlParameter("@Location", values["location"]));
+                cmd.Parameters.Add(new SqlParameter("@images", ""));
+                cmd.Parameters.Add(new SqlParameter("@qr", ""));
+                TempData["Message"] = "Location Details inserted successfully";
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+            return View();
+        }
     }
 }
