@@ -319,6 +319,42 @@ namespace PTS.Controllers
         }
 
         [HttpGet]
+        public ActionResult DeleteFamily(int familyId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Delete_Admin_FamilyMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Family_Id", familyId));
+                con.Open();
+                try
+                {
+                    if(cmd.ExecuteNonQuery() != 0)
+                    {
+                        TempData["Message"] = "Family details deleted successfully.";
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    TempData["Message"] = "This family has Plant Detalils. Deletion failed.";
+                }
+            }
+            return Redirect("/Plant/AddFamily/");
+        }
+
+        [HttpGet]
         public ActionResult AddPlant(int familyId)
         {
             if (Session["Username"] == null)
@@ -391,6 +427,42 @@ namespace PTS.Controllers
         }
 
         [HttpGet]
+        public ActionResult DeletePlant(int familyId, int plantId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Delete_Admin_PlantMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Plant_Id", plantId));
+                con.Open();
+                try
+                {
+                    if (cmd.ExecuteNonQuery() != 0)
+                    {
+                        TempData["Message"] = "Plant details deleted successfully.";
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    TempData["Message"] = "This Plant has Variety Details. Deletion failed.";
+                }
+            }
+            return Redirect($"/Plant/AddPlant/?familyId={familyId}");
+        }
+
+        [HttpGet]
         public ActionResult AddVariety(int familyId, int plantId)
         {
             if (Session["Username"] == null)
@@ -419,6 +491,8 @@ namespace PTS.Controllers
                 reader.Close();
                 ViewBag.VarietyList = varietyList;
             }
+            ViewBag.FamilyId = familyId;
+            ViewBag.PlantId = plantId;
             return View();
         }
 
@@ -468,17 +542,90 @@ namespace PTS.Controllers
                 reader.Close();
                 ViewBag.VarietyList = varietyList;
             }
+            ViewBag.FamilyId = familyId;
+            ViewBag.PlantId = plantId;
             return View();
         }
 
         [HttpGet]
-        public ActionResult AddLocationDate(int plantId, int varietyId)
+        public ActionResult DeleteVariety(int familyId, int plantId, int varietyId)
         {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Delete_Admin_VarietyMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Variety_Id", varietyId));
+                con.Open();
+                try
+                {
+                    if (cmd.ExecuteNonQuery() != 0)
+                    {
+                        TempData["Message"] = "Variety details deleted successfully.";
+                    }
+            }
+                catch (SqlException ex)
+            {
+                TempData["Message"] = "This Variety has Location Details. Deletion failed.";
+            }
+        }
+            return Redirect($"/Plant/AddVariety/?familyId={familyId}&plantId={plantId}");
+        }
+
+        [HttpGet]
+        public ActionResult AddLocationDate(int familyId, int plantId, int varietyId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+            //Get all records from LocationMaster with variety and plant ids
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Display_Admin_LocationMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@Plant_Id", plantId));
+                cmd.Parameters.Add(new SqlParameter("@Variety_Id", varietyId));
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                var displayLocations = new List<List<string>>();
+                while (reader.Read())
+                {
+                    displayLocations.Add(new List<string>() {
+                        reader["UniquePlant_Id"].ToString(),
+                        reader["DateOfPlanting"].ToString(),
+                        reader["Location"].ToString()
+                    });
+                }
+                ViewBag.DisplayLocations = displayLocations;
+            }
+            ViewBag.FamilyId = familyId;
+            ViewBag.PlantId = plantId;
+            ViewBag.VarietyId = varietyId;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddLocationDate(int plantId, int varietyId, FormCollection values)
+        public ActionResult AddLocationDate(int familyId, int plantId, int varietyId, FormCollection values)
         {
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -496,7 +643,37 @@ namespace PTS.Controllers
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
-            return View();
+            
+            return Redirect($"/Plant/AddLocationDate/?familyId={familyId}&plantId={plantId}&varietyId={varietyId}");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteLocationDate(int id, int familyId, int plantId, int varietyId)
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            // To delete a record in LocationMaster Table
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Delete_Admin_LocationMaster", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@uid", id));
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                TempData["Message"] = "Location Details deleted successfully";
+            }
+            return Redirect($"/Plant/AddLocationDate/?familyId={familyId}&plantId={plantId}&varietyId={varietyId}");
         }
     }
 }

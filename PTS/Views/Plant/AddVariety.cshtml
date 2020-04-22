@@ -15,6 +15,8 @@
 
                 <center><h1>Variety Details</h1></center>
                 <hr>
+                <a class="admin-btn" href="/Plant/AddPlant/?familyId=@ViewBag.FamilyId"><i class="fas fa-backward"></i> Plant</a><br />
+                <br />
 
                 <form method="post" class="needs-validation" novalidate>
                     <div class="form-group">
@@ -129,7 +131,9 @@
 
                         <div class="btn-box">
                             <button type="submit" id="varietyInsert" class="btn btn-success" hidden>Submit <i class="fas fa-paper-plane"></i></button>
-                            <a id="varietySelect" class="admin-btn" href="" hidden>Location <i class="fas fa-forward"></i></a>
+                            <a id="varietyDelete" class="btn btn-danger" href="" hidden>Delete Variety <i class="fas fa-trash-alt"></i></a>
+                            <a id="plantSelect" class="admin-btn" href="/Plant/AddPlant/?familyId=@ViewBag.FamilyId" hidden><i class="fas fa-backward"></i> Plant</a>
+                            <a id="varietySelect" class="admin-btn" href="/Plant/AddLocationDate/?familyId=@ViewBag.FamilyId" hidden>Location <i class="fas fa-forward"></i></a>
                         </div>
                     </div>
                 </form>

@@ -342,6 +342,7 @@
     <Content Include="Views\Plant\AddVariety.cshtml" />
     <Content Include="Views\Plant\AddLocationDate.cshtml" />
     <Content Include="Scripts\Plant\AddLocationDate.js" />
+    <Content Include="Views\Account\RoleChange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

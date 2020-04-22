@@ -7,15 +7,34 @@
     <script src="/Scripts/Plant/AddLocationDate.js"></script>
 }
 
+
 <section>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <hr>
-
                 <center><h1>Location and Date Details</h1></center>
                 <hr>
+                <a class="admin-btn" href="/Plant/AddVariety/?familyId=@ViewBag.FamilyId&plantId=@ViewBag.PlantId"><i class="fas fa-backward"></i> Plant</a><br />
+                <br />
+                <h1> Existing Locations:</h1>
+                <p><i>Showing @ViewBag.DisplayLocations.Count existing locations.</i></p>
+                <div class="container">
+                    <div class="row">
+                        @for (var i = 0; i < ViewBag.DisplayLocations.Count; i++)
+                        {
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="border:0.5px solid grey;padding-top:5px;">
 
+                                <p>Location: @ViewBag.DisplayLocations[i][2]</p>
+                                <p>Date Of Planting: @ViewBag.DisplayLocations[i][1]</p>
+                                <p><a class="btn btn-danger btn-small" href="/Plant/DeleteLocationDate/@ViewBag.DisplayLocations[i][0]/?familyId=@ViewBag.FamilyId&plantId=@ViewBag.PlantId&varietyId=@ViewBag.VarietyId">Delete <i class="fas fa-trash-alt"></i></a></p>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <h1>Insert new Location:</h1>
                 <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
 
                     <div class="form-group">

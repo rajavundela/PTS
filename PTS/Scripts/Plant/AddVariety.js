@@ -30,7 +30,9 @@ function variety() {
     let growingConditions = document.querySelector("#growingConditions");
 
     let varietySelect = document.querySelector("#varietySelect");
+    let varietyDelete = document.querySelector("#varietyDelete");
     let varietyInsert = document.querySelector("#varietyInsert");
+    let plantSelect = document.querySelector("#plantSelect");
 
     $.get(`/api/VarietyApi/?varietyName=${varietySearch}`, function (data, status) {
 
@@ -75,6 +77,8 @@ function variety() {
             
 
             varietySelect.hidden = true;
+            varietyDelete.hidden = true;
+            plantSelect.hidden = true;
             varietyInsert.hidden = false;
 
             var message = `
@@ -128,9 +132,14 @@ function variety() {
             growingConditions.disabled = true;
 
             varietySelect.hidden = false;
+            varietyDelete.hidden = false;
+            plantSelect.hidden = false;
             varietyInsert.hidden = true;
-            //Add link to AddLocationDate page
-            varietySelect.href = `/Plant/AddLocationDate/?plantId=${plantId}&varietyId=${varietyId}`;
+            //Add link to AddLocationDate page 
+            varietySelect.href += `&plantId=${plantId}&varietyId=${varietyId}`;
+
+            let link = window.location.href; // gets current page link 
+            varietyDelete.href = link.replace('AddVariety', 'DeleteVariety') + "&varietyId=" + varietyId;
         }
     });
 }

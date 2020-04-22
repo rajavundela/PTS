@@ -4,7 +4,7 @@
 
 
 function Plant() {
-    let plantSearch = document.querySelector("#plantSearch").value;//this is value
+    let plantSearch = document.querySelector("#plantSearch").value;//this is value 
     if (plantSearch == '') {
         return;
     }
@@ -20,7 +20,9 @@ function Plant() {
     let healthHazards = document.querySelector("#healthHazards");
 
     let plantSelect = document.querySelector("#plantSelect");
+    let plantDelete = document.querySelector("#plantDelete");
     let plantInsert = document.querySelector("#plantInsert");
+    let familySelect = document.querySelector("#familySelect");
 
     $.get(`/api/PlantApi/?botanicalName=${plantSearch}`, function (data, status) {
 
@@ -44,6 +46,8 @@ function Plant() {
             healthHazards.disabled = false;
 
             plantSelect.hidden = true;
+            plantDelete.hidden = true;
+            familySelect.hidden = true;
             plantInsert.hidden = false;
 
             var message = `
@@ -77,9 +81,13 @@ function Plant() {
             healthHazards.disabled = true;
 
             plantSelect.hidden = false;
+            plantDelete.hidden = false;
+            familySelect.hidden = false;
             plantInsert.hidden = true;
             //Add link to AddVariety page
             plantSelect.href = `/Plant/AddVariety/?familyId=${familyId}&plantId=${plantId}`;
+
+            plantDelete.href = `/Plant/DeletePlant/?familyId=${familyId}&plantId=${plantId}`;
         }
     });
 }

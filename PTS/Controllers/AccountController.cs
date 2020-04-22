@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -146,6 +147,62 @@ namespace PTS.Controllers
             //put sucess or no success flags in ViewBag
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult RoleChange()
+        {
+            if (Session["Username"] == null)
+            {
+                TempData["Message"] = "You must login before accessing this page.";
+                return RedirectToAction("LoginRegister", "Account");
+            }
+            if (!Session["UserType"].Equals("2")) // not admin
+            {
+                TempData["Message"] = "You do not have rights to modify data. Please contact an Admin.";
+                return Redirect("/Home/Index");
+            }
+
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // Create the command and set its properties.
+                SqlCommand cmd = new SqlCommand("select role from rolemaster", con);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                var roles = new List<string>();
+                while (reader.Read())
+                {
+                    roles.Add(reader["role"].ToString());
+                }
+                ViewBag.Roles = roles;
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RoleChange(FormCollection values)
+        {
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_Admin_Role_Change", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@role", values["role"]));
+                cmd.Parameters.Add(new SqlParameter("@email", values["email"]));
+                con.Open();
+                if (cmd.ExecuteNonQuery() == 0)
+                {
+                    TempData["Message"] = "Invalid email address";
+                }
+                else
+                {
+                    TempData["Message"] = "Access rights changed successfully.";
+                }
+
+            }
+            return Redirect("/Account/RoleChange");
         }
 
     }

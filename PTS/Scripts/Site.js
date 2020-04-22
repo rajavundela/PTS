@@ -14,4 +14,6 @@
             }, false);
           });
         }, false);
-      })();
+})();
+
+$("#message").delay(5000).fadeOut();

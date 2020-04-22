@@ -15,9 +15,9 @@ function family() {
     var familyCommonName = document.querySelector("#familyCommonName");
     var habitat = document.querySelector("#habitat");
     var familySelect = document.querySelector("#familySelect");
+    var familyDelete = document.querySelector("#familyDelete");
     var familyInsert = document.querySelector("#familyInsert");
-
-
+    
     $.get(`/api/familyapi/?familyName=${familySearch}`, function (data, status) {
 
         if ($.isEmptyObject(data)) {
@@ -28,8 +28,8 @@ function family() {
 
             familyCommonName.disabled = false;
             habitat.disabled = false;
-
             familySelect.hidden = true;
+            familyDelete.hidden = true;
             familyInsert.hidden = false;
 
             var message = `
@@ -50,9 +50,11 @@ function family() {
             habitat.disabled = true;
 
             familySelect.hidden = false;
+            familyDelete.hidden = false;
             familyInsert.hidden = true;
-            //Add link to AddPlant page
-            document.querySelector("#familySelect").href = "/Plant/AddPlant/?familyId=" + familyId;//while you are adding plant u need familyid
+            //Add link to AddPlant page 
+            familySelect.href = "/Plant/AddPlant/?familyId=" + familyId;//while you are adding plant u need familyid
+            familyDelete.href = "/Plant/DeleteFamily/?familyId=" + familyId;
         }
     });
 }

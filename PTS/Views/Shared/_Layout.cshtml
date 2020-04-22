@@ -8,7 +8,6 @@
     @Scripts.Render("~/bundles/modernizr")
     <!--font awesome script for icons-->
     <link href="~/Content/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet">
-    <script src="/Scripts/site.js"></script>
     @RenderSection("HeadContent", required: false)
 
 </head>
@@ -55,13 +54,11 @@
                                 <a class="nav-link dropdown-toggle btn btn-light" href="#" id="navbarDevelopmentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Navigation</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDevelopmentDropdown">
                                     <div class="dropdown-header">Admin</div>
-                                    <a class="dropdown-item" href="#">Add Admin</a>
-                                    <a class="dropdown-item" href="#">Delete Admin</a>
+                                    <a class="dropdown-item" href="/Account/RoleChange/">Change Role</a>
                                     <div class="dropdown-divider"></div>
 
                                     <div class="dropdown-header">Plants</div>
-                                    <a class="dropdown-item" href="/Plant/AddFamily/">Insert Details</a>
-                                    <a class="dropdown-item" href="#">Delete Details</a>
+                                    <a class="dropdown-item" href="/Plant/AddFamily/">Add or Delete Details</a>
                                 </div>
                             </li>
                         }
@@ -81,7 +78,7 @@
 
     @if (TempData.ContainsKey("Message"))
     {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align:center">
+        <div id="message" class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align:center">
             @TempData["Message"]
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -117,8 +114,7 @@
     </section>
 
     @Scripts.Render("~/bundles/jquery")
+    <script src="/Scripts/site.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
-
-
 </body>
 </html>

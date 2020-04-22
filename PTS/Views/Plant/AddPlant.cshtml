@@ -12,6 +12,8 @@
         <div class="row">
             <div class="col-md-12">
                 <hr><center><h1>Plant Details</h1></center><hr>
+                <a class="admin-btn" href="/Plant/AddFamily/"><i class="fas fa-backward"></i> Family</a>
+                <br /><br />
                 <form class="needs-validation" method="post" novalidate>
 
                     <div class="form-group">
@@ -75,6 +77,8 @@
 
                         <div class="btn-box">
                             <button type="submit" id="plantInsert" class="btn btn-success" hidden>Submit <i class="fas fa-paper-plane"></i></button>
+                            <a id="plantDelete" class="btn btn-danger" href="" hidden>Delete Plant <i class="fas fa-trash-alt"></i></a>
+                            <a id="familySelect" class="admin-btn" href="/Plant/AddFamily/" hidden><i class="fas fa-backward"></i> Family</a>
                             <a id="plantSelect" class="admin-btn" href="" hidden>Variety <i class="fas fa-forward"></i></a>
                         </div>
                     </div>
