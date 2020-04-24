@@ -65,3 +65,16 @@ body, html {
 .fa-map-marker-alt {
     margin: 0 5px;
 }
+
+.footer {
+    /* margin-top: 7%; */
+    padding: 5px;
+    /* background-image:linear-gradient(#ac8532,#21701b); */
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(footerImage.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+}
+

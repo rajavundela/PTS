@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Add Location & Date";
+    ViewBag.Title = "Location & Date";
 }
 
 @section HeadContent{
@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label>Date of Planting *</label>
-                        <input type="text" class="form-control" Name="dateOfPlanting" placeholder="yyyy-mm-dd" required>
+                        <input type="date" class="form-control" Name="dateOfPlanting" required>
                         <div class="valid-feedback"></div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
@@ -51,29 +51,25 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
 
-                    <div class="danger">
-                        <p><strong> Note: </strong>Plant images upload will be enabled in next update.</p>
-                    </div>
-                    <br>
                     <div>
                         <label for="plantImage1">Upload Image 1 </label>
-                        <input type="file" id="plantImage1" name="plantImage1" accept=".jpg, .jpeg, .png" disabled>
+                        <input type="file" id="plantImage1" name="img1" accept="image/*" required>
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <div class="invalid-feedback">Please select an image.</div>
                     </div>
                     <br>
                     <div>
                         <label for="plantImage2">Upload Image 2 </label>
-                        <input type="file" id="plantImage2" name="plantImage2" accept=".jpg, .jpeg, .png" disabled>
+                        <input type="file" id="plantImage2" name="img2" accept="image/*" required>
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <div class="invalid-feedback">Please select an image.</div>
                     </div>
                     <br>
                     <div>
                         <label for="plantImage3">Upload Image 3 </label>
-                        <input type="file" id="plantImage3" name="plantImage3" accept=".jpg, .jpeg, .png" disabled>
+                        <input type="file" id="plantImage3" name="img3" accept="image/*" required>
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <div class="invalid-feedback">Please select an image.</div>
                     </div>
 
                     <div class="btn-box">

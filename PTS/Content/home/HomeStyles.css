@@ -6,7 +6,7 @@
 .mine {
     height: 100%;
     background-color: black;
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('img/home-background.jpg');
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('img/home-background.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

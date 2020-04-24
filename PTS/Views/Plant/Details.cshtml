@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "Plant Details";
 }
-
+@section HeadContent{
+    <link rel="stylesheet" href="/Content/Plant/DetailsStyles.css"/>
+}
 <section class="container" id="details">
     <center><h2>Plant Details</h2></center>
     <div class="bs-example">
@@ -14,15 +16,17 @@
             </ol>
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
-                <div class="carousel-item active" id="img-container-block">
-                    <img src="./img/plant.jpg" alt="First image" id="img-box">
-                </div>
-                <div class="carousel-item" id="img-container-block">
-                    <img src="./img/plant.jpg" alt="Second image" id="img-box">
-                </div>
-                <div class="carousel-item" id="img-container-block">
-                    <img src="./img/plant.jpg" alt="Third image" id="img-box">
-                </div>
+                @if(ViewBag.Img1 != ""){
+                    <div class="carousel-item active" id="img-container-block">
+                        <img src="@Url.Content(ViewBag.Img1)" alt="First image" id="img-box">
+                    </div>
+                    <div class="carousel-item" id="img-container-block">
+                        <img src="@Url.Content(ViewBag.Img2)" alt="Second image" id="img-box">
+                    </div>
+                    <div class="carousel-item" id="img-container-block">
+                        <img src="@Url.Content(ViewBag.Img3)" alt="Third image" id="img-box">
+                    </div>
+                }
             </div>
             <!-- Carousel controls -->
             <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">

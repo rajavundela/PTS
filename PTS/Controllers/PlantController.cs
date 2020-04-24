@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.SqlClient;// This data provider need to make connection with SQL Server
+using System.IO;
 //Connection object for SQL Server is Sqlconnection
 
 namespace PTS.Controllers
@@ -77,6 +78,9 @@ namespace PTS.Controllers
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
+                    ViewBag.Img1 = reader["img1"].ToString();
+                    ViewBag.Img2 = reader["img2"].ToString();
+                    ViewBag.Img3 = reader["img3"].ToString();
                     ViewBag.FamilyName = reader["FamilyName"].ToString();
                     ViewBag.FamilyCommonName = reader["FamilyCommonName"].ToString();
                     ViewBag.Habitat = reader["Habitat"].ToString();
@@ -627,18 +631,36 @@ namespace PTS.Controllers
         [HttpPost]
         public ActionResult AddLocationDate(int familyId, int plantId, int varietyId, FormCollection values)
         {
+            string[] imagePaths = new string[3] { "", "", "" };//these are relative paths to store in database
+            string datetime = DateTime.Now.ToString("yyyyMMddHHmmssffffff");
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                if (Request.Files[i].ContentLength == 0) continue;
+                string fileName = Path.GetFileNameWithoutExtension(Request.Files[i].FileName);
+                string extension = Path.GetExtension(Request.Files[i].FileName);
+                fileName = fileName + datetime + "-" + i + extension;//preventing duplicay of filename by appending datetime and i value
+                imagePaths[i] = "~/Images/" + fileName;
+                string absolutePath = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                Request.Files[i].SaveAs(absolutePath);
+            }
+
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand("sp_Insert_Admin_LocationDetails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.Add(new SqlParameter("@Family_Id", familyId));
                 cmd.Parameters.Add(new SqlParameter("@Plant_Id", plantId));
                 cmd.Parameters.Add(new SqlParameter("@Variety_Id", varietyId));
                 cmd.Parameters.Add(new SqlParameter("@DateOfPlanting", values["dateOfPlanting"]));
                 cmd.Parameters.Add(new SqlParameter("@Location", values["location"]));
-                cmd.Parameters.Add(new SqlParameter("@images", ""));
+                //below are relative paths to files
+                cmd.Parameters.Add(new SqlParameter("@img1", imagePaths[0]));
+                cmd.Parameters.Add(new SqlParameter("@img2", imagePaths[1]));
+                cmd.Parameters.Add(new SqlParameter("@img3", imagePaths[2]));
                 cmd.Parameters.Add(new SqlParameter("@qr", ""));
+
                 TempData["Message"] = "Location Details inserted successfully";
                 con.Open();
                 cmd.ExecuteNonQuery();

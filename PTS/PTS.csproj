@@ -157,7 +157,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home\HomeStyles.css" />
-    <Content Include="Content\home\img\home-background.jpg" />
     <Content Include="Content\home\img\logo.png" />
     <Content Include="Content\home\img\test.JPG" />
     <Content Include="Content\Media\ProfileImages\DefaultImage.png" />
@@ -343,6 +342,9 @@
     <Content Include="Views\Plant\AddLocationDate.cshtml" />
     <Content Include="Scripts\Plant\AddLocationDate.js" />
     <Content Include="Views\Account\RoleChange.cshtml" />
+    <Content Include="Content\Plant\DetailsStyles.css" />
+    <None Include="Content\home\img\home-background.jpeg" />
+    <None Include="Content\footerImage.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -350,6 +352,7 @@
     <Folder Include="Models\" />
     <Folder Include="Content\Plant\" />
     <Folder Include="Scripts\Plant\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
