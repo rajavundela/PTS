@@ -23,13 +23,18 @@
                     <div class="row">
                         @for (var i = 0; i < ViewBag.DisplayLocations.Count; i++)
                         {
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="border:0.5px solid grey;padding-top:5px;">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="border:0.5px solid grey;padding-top:5px;">
 
-                                <p>Location: @ViewBag.DisplayLocations[i][2]</p>
-                                <p>Date Of Planting: @ViewBag.DisplayLocations[i][1]</p>
-                                <p><a class="btn btn-danger btn-small" href="/Plant/DeleteLocationDate/@ViewBag.DisplayLocations[i][0]/?familyId=@ViewBag.FamilyId&plantId=@ViewBag.PlantId&varietyId=@ViewBag.VarietyId">Delete <i class="fas fa-trash-alt"></i></a></p>
+                            <p>Location: @ViewBag.DisplayLocations[i][2]</p>
+                            <p>Date Of Planting: @ViewBag.DisplayLocations[i][1]</p>
+                            <p><a class="btn btn-danger btn-small" href="/Plant/DeleteLocationDate/@ViewBag.DisplayLocations[i][0]/?familyId=@ViewBag.FamilyId&plantId=@ViewBag.PlantId&varietyId=@ViewBag.VarietyId">Delete <i class="fas fa-trash-alt"></i></a></p>
 
-                            </div>
+                            @if (ViewBag.DisplayLocations[i][3] != "")
+                            {
+                                <p><a href="@Url.Content(ViewBag.DisplayLocations[i][3])" download>Download QR</a></p>
+                            }
+
+                        </div>
                         }
                     </div>
                 </div>

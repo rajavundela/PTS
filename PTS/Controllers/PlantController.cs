@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.SqlClient;// This data provider need to make connection with SQL Server
 using System.IO;
+using QRCoder;
+using System.Drawing;
 //Connection object for SQL Server is Sqlconnection
 
 namespace PTS.Controllers
@@ -62,6 +64,12 @@ namespace PTS.Controllers
                 ViewBag.SearchString = searchString;
                 ViewBag.SearchResults = searchResults;
             }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult QrSearch()
+        {
             return View();
         }
 
@@ -616,7 +624,8 @@ namespace PTS.Controllers
                     displayLocations.Add(new List<string>() {
                         reader["UniquePlant_Id"].ToString(),
                         reader["DateOfPlanting"].ToString(),
-                        reader["Location"].ToString()
+                        reader["Location"].ToString(),
+                        reader["QR"].ToString()
                     });
                 }
                 ViewBag.DisplayLocations = displayLocations;
@@ -663,9 +672,28 @@ namespace PTS.Controllers
 
                 TempData["Message"] = "Location Details inserted successfully";
                 con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                string uId = "";
+                if (reader.Read())
+                {
+                    uId = reader["UniquePlant_Id"].ToString();
+                }
+                reader.Close();
+
+                //Creating Qr and saving to Images Folder
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(uId, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                //parameters(imageName, imageFormat) for saving qr
+                qrCodeImage.Save(Path.Combine(Server.MapPath("~/Images/"), uId + ".jpeg"), System.Drawing.Imaging.ImageFormat.Jpeg);
+                qrCodeImage.Dispose();
+
+                //insert QR path into LocationMaster
+                cmd = new SqlCommand($"update LocationMaster set qr='~/Images/{uId}.jpeg' where uniqueplant_id={uId}", con);
                 cmd.ExecuteNonQuery();
             }
-            
+
             return Redirect($"/Plant/AddLocationDate/?familyId={familyId}&plantId={plantId}&varietyId={varietyId}");
         }
 

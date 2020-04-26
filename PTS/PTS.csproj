@@ -112,6 +112,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="QRCoder">
+      <HintPath>..\packages\QRCoder.1.3.9\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -317,7 +320,7 @@
     <Content Include="Content\fontawesome-free-5.13.0-web\css\solid.min.css" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.svg" />
-    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.woff2" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.eot" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.woff" />
@@ -325,8 +328,8 @@
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.ttf" />
-    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.woff2" />
-    <None Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.woff2" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.woff" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\fontawesome-free-5.13.0-web\webfonts\fa-regular-400.eot" />
@@ -343,12 +346,34 @@
     <Content Include="Scripts\Plant\AddLocationDate.js" />
     <Content Include="Views\Account\RoleChange.cshtml" />
     <Content Include="Content\Plant\DetailsStyles.css" />
-    <None Include="Content\home\img\home-background.jpeg" />
-    <None Include="Content\footerImage.jpeg" />
+    <Content Include="Content\home\img\home-background.jpeg" />
+    <Content Include="Content\footerImage.jpeg" />
+    <Content Include="Views\Plant\QrSearch.cshtml" />
+    <Content Include="Scripts\Plant\QrSearch.js" />
+    <Content Include="Scripts\qrCodeFiles\alignpat.js" />
+    <Content Include="Scripts\qrCodeFiles\bmparser.js" />
+    <Content Include="Scripts\qrCodeFiles\qrcode.js" />
+    <Content Include="Scripts\qrCodeFiles\grid.js" />
+    <Content Include="Scripts\qrCodeFiles\decoder.js" />
+    <Content Include="Scripts\qrCodeFiles\detector.js" />
+    <None Include="Scripts\qrCodeFiles\qrcode.js.map" />
+    <None Include="Scripts\qrCodeFiles\qcode-decoder.min.js.map" />
+    <Content Include="Scripts\qrCodeFiles\version.js" />
+    <Content Include="Scripts\qrCodeFiles\datablock.js" />
+    <Content Include="Scripts\qrCodeFiles\databr.js" />
+    <Content Include="Scripts\qrCodeFiles\bitmat.js" />
+    <Content Include="Scripts\qrCodeFiles\formatinf.js" />
+    <Content Include="Scripts\qrCodeFiles\qcode-decoder.min.js" />
+    <Content Include="Scripts\qrCodeFiles\errorlevel.js" />
+    <Content Include="Scripts\qrCodeFiles\gf256.js" />
+    <Content Include="Scripts\qrCodeFiles\rsdecoder.js" />
+    <Content Include="Scripts\qrCodeFiles\findpat.js" />
+    <Content Include="Scripts\qrCodeFiles\datamask.js" />
+    <Content Include="Scripts\qrCodeFiles\gf256poly.js" />
+    <Content Include="Content\Plant\QrSearchStyles.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Media\PlantImages\" />
     <Folder Include="Models\" />
     <Folder Include="Content\Plant\" />
     <Folder Include="Scripts\Plant\" />

@@ -1,0 +1,54 @@
+﻿body {
+    background-color: #e5ffef;
+}
+
+section {
+    text-align: center;
+}
+
+#videoElement {
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+}
+
+.QR {
+    padding: 50px 0;
+}
+
+    .QR h1 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+.QR-box {
+    margin-bottom: 30px;
+}
+
+@media (max-width:74.9em) {
+    section {
+        margin-top: 70px;
+    }
+
+    #videoElement {
+        width: 70%;
+        height: 45%;
+    }
+}
+
+@media (max-width:61.9em) {
+    section {
+        margin-top: 50px;
+        margin: 17%;
+    }
+
+    video {
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    #videoElement {
+        width: 100%;
+        height: 33%;
+    }
+}

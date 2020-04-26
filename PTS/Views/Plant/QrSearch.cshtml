@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Qr Search";
+}
+@section HeadContent{
+    <link rel="stylesheet" href="/Content/Plant/QrSearchStyles.css"/>
+}
+
+<section class="QR">
+    <div class="container">
+        <div class="QR-box">
+            <h1>QR Code Scanner</h1>
+            <video id="videoElement"></video>
+            <div style="margin-top:20px">
+                <h2>QR Scanner Result:</h2>
+                <h3 id="qrContent" style="color:tomato"></h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/qrCodeFiles/qcode-decoder.min.js"></script>
+<script src="~/Scripts/Plant/QrSearch.js"></script>
+
+
+
