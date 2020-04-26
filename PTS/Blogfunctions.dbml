@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="pts" Class="BlogfunctionsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=pts69dbserver.database.windows.net;Initial Catalog=pts;Persist Security Info=True;User ID=pts" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ptsConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.sp_BlogCategory" Method="sp_BlogCategory">
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_BlogKeyword" Method="sp_BlogKeyword">
+    <Parameter Name="BlogName" Parameter="blogName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Keyword" Parameter="keyword" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CreateBlog" Method="CreateBlog">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Title" Parameter="title" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Snippet" Parameter="snippet" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Post" Parameter="post" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Category" Parameter="category" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Published" Parameter="published" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

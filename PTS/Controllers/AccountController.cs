@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
 namespace PTS.Controllers
 {
     public class AccountController : Controller
     {
         // GET: Account
         public ActionResult Index()
-        {   
-            if(Session["Username"] == null)
+        {
+            if (Session["Username"] == null)
             {
                 TempData["Message"] = "You must login before accessing this page.";
                 return RedirectToAction("LoginRegister", "Account");
@@ -58,7 +58,7 @@ namespace PTS.Controllers
                 }
 
                 else
-                {   
+                {
                     //insert data into database
                     con.Open();
                     query = $"insert into userDetails(userName, emailId, password, dateCreated) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}','{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")}')";
@@ -80,7 +80,7 @@ namespace PTS.Controllers
 
                     return View();
                 }
-                
+
             }
 
             //Login
@@ -105,7 +105,7 @@ namespace PTS.Controllers
                         Session["UserType"] = sdr["Role_Id"].ToString();
 
                         TempData["Message"] = $"Welcome {LoginUsername}..!";
-                        
+
                         con.Close();
                         return Redirect("~/Home/Index");
                     }
@@ -125,7 +125,7 @@ namespace PTS.Controllers
                     con.Close();
                     return View();
                 }
-                
+
             }
         }
 
@@ -136,7 +136,7 @@ namespace PTS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
         public ActionResult ForgotPassword()
         {
             return View();
