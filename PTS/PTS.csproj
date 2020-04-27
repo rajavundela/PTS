@@ -160,7 +160,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home\HomeStyles.css" />
-    <Content Include="Content\home\img\logo.png" />
+    <Content Include="Content\home\img\Home Logo.png" />
+    <Content Include="Content\home\img\LogoPlantTracker.png" />
     <Content Include="Content\home\img\test.JPG" />
     <Content Include="Content\Media\ProfileImages\DefaultImage.png" />
     <Content Include="favicon.ico" />
@@ -374,10 +375,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Content\Plant\" />
-    <Folder Include="Scripts\Plant\" />
     <Folder Include="Images\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
