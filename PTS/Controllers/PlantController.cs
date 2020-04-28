@@ -160,6 +160,7 @@ namespace PTS.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("@uid", id));
 
+
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -253,11 +254,9 @@ namespace PTS.Controllers
                 cmd.Parameters.Add(new SqlParameter("@DateOfPlanting", values["DateOfPlanting"]));
                 cmd.Parameters.Add(new SqlParameter("@Location", values["LocationOfPlant"]));
 
-                cmd.Parameters.Add(new SqlParameter("@ModifyBy", Session["Username"]));
+                cmd.Parameters.Add(new SqlParameter("@ModifiedBy", Session["Username"]));
                 cmd.Parameters.Add(new SqlParameter("@uid", id));
-                cmd.Parameters.Add(new SqlParameter("@ModifiedDate", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")));
                 cmd.Parameters.Add(new SqlParameter("@OtherDetails", ""));
-
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -418,6 +417,7 @@ namespace PTS.Controllers
                 cmd.Parameters.Add(new SqlParameter("@Medical_Benefit", values["medicalBenefits"]));
                 cmd.Parameters.Add(new SqlParameter("@Health_Hazard", values["healthHazards"]));
 
+                cmd.Parameters.Add(new SqlParameter("@PlantEntryBy", Session["Username"]));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 TempData["Message"] = "Plant Details inserted successfully";
@@ -537,6 +537,7 @@ namespace PTS.Controllers
                 cmd.Parameters.Add(new SqlParameter("@longevity", values["longetivity"]));
                 cmd.Parameters.Add(new SqlParameter("@growing_condition ", values["growingConditions"]));
 
+                cmd.Parameters.Add(new SqlParameter("@VarietyEntryBy", Session["Username"]));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 TempData["Message"] = "Variety Details inserted successfully";
@@ -670,6 +671,7 @@ namespace PTS.Controllers
                 cmd.Parameters.Add(new SqlParameter("@img3", imagePaths[2]));
                 cmd.Parameters.Add(new SqlParameter("@qr", ""));
 
+                cmd.Parameters.Add(new SqlParameter("@LocEntryBy", Session["Username"]));
                 TempData["Message"] = "Location Details inserted successfully";
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();

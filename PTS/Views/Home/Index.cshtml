@@ -38,91 +38,37 @@
 
 <section class="features">
 
-    <h1>Features</h1>
+    <h1>Newly Added Plants</h1>
 
     <div class="container">
 
         <div class="row">
+            @for (int i = 0; i < ViewBag.RecentlyAdded.Count; i++)
+            {
+                <div class="col-md-4">
 
-            <div class="col-md-4">
+                    <div class="feature-box">
 
-                <div class="feature-box">
+                        <div class="feature-img">
+                            @if (ViewBag.RecentlyAdded[i][5] != "")
+                            {
+                                <img src="@Url.Content(ViewBag.RecentlyAdded[i][5])" alt="image">
+                            }
 
-                    <div class="feature-img">
-
-                        <img src="~/Content/home/img/test.jpg" alt="mango">
-
-                        <div class="feature-details">
-
-                            <h4>Mango</h4>
-
-                            <p>
-
-                                Mango usually available during summer.It has many uses mostly in the field of medicine.
-
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="feature-box">
-
-                    <div class="feature-img">
-
-                        <img src="~/Content/home/img/test.jpg" alt="mango">
-
-                        <div class="feature-details">
-
-                            <h4>Mango</h4>
-
-                            <p>
-
-                                Mango usually available during summer.It has many uses mostly in the field of medicine.
-
-                            </p>
+                            <div class="feature-details">
+                                <p><small><i>Added on @ViewBag.RecentlyAdded[i][6] by @ViewBag.RecentlyAdded[i][7]</i></small></p>
+                                <p>Location: @ViewBag.RecentlyAdded[i][0]</p>
+                                <p>Family Name: @ViewBag.RecentlyAdded[i][1]</p>
+                                <p>Botanical Name: @ViewBag.RecentlyAdded[i][2]</p>
+                                <p>Variety Name: @ViewBag.RecentlyAdded[i][3]</p>
+                                <p><a href="/Plant/Details/@ViewBag.RecentlyAdded[i][4]">Read More...</a></p>
+                            </div>
 
                         </div>
 
                     </div>
-
                 </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="feature-box">
-
-                    <div class="feature-img">
-
-                        <img src="~/Content/home/img/test.jpg" alt="mango">
-
-                        <div class="feature-details">
-
-                            <h4>Mango</h4>
-
-                            <p>
-
-                                Mango usually available during summer.It has many uses mostly in the field of medicine.
-
-                            </p>
-
-
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+            }
         </div>
 
     </div>
