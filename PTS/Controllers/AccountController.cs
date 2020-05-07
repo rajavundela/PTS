@@ -42,28 +42,31 @@ namespace PTS.Controllers
                 ViewBag.RegisterUsername = RegisterUsername;
                 ViewBag.Email = RegisterEmail;
                 con.Open();
-                string query = $"SELECT userName, emailId FROM userDetails WHERE userName='{RegisterUsername}'";
+                string query = "SELECT userName, emailId FROM userDetails WHERE userName=@0";
                 SqlCommand cmd = new SqlCommand(query);
                 cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@0", RegisterUsername);
                 // Executing query
                 SqlDataReader sdr = cmd.ExecuteReader();
 
                 bool isExist = sdr.Read();//reads next record (returns false if there is no record to read)
-                con.Close();
+                sdr.Close();
                 if (isExist)
                 {
                     //Error message: username already exists
                     TempData["Message"] = "Username already exists. Enter a different one.";
+                    con.Close();
                     return View();
                 }
 
                 else
                 {   
                     //insert data into database
-                    con.Open();
-                    query = $"insert into userDetails(userName, emailId, password, dateCreated) values('{RegisterUsername}','{RegisterEmail}','{RegisterPassword}','{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")}')";
-                    SqlCommand cmd2 = new SqlCommand(query);
-                    cmd2.Connection = con;
+                    SqlCommand cmd2 = new SqlCommand("InsertUserDetails", con);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+                    cmd2.Parameters.Add(new SqlParameter("@UserName", RegisterUsername));
+                    cmd2.Parameters.Add(new SqlParameter("@Email", RegisterEmail));
+                    cmd2.Parameters.Add(new SqlParameter("@Password", RegisterPassword));
                     try
                     {
                         cmd2.ExecuteNonQuery();
@@ -90,9 +93,10 @@ namespace PTS.Controllers
                 ViewBag.LoginUsername = LoginUsername;
                 con.Open();
 
-                string query = $"SELECT userName, password, Role_Id FROM userDetails WHERE userName='{LoginUsername}'";
+                string query = "SELECT userName, password, Role_Id FROM userDetails WHERE userName=@0";
                 SqlCommand cmd = new SqlCommand(query);
                 cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@0", LoginUsername);
                 // Executing query 
                 SqlDataReader sdr = cmd.ExecuteReader();
 

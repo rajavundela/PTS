@@ -19,8 +19,9 @@ namespace PTS.Controllers
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = $"select Plant_Id, Variety_Id, Variety_Name, Nature, TimeOfSetting, TimeOfFlowering, Rotation_Period, Propagation_Method, Tree_Height, Trunk_Color, Tree_Form, Leaf_Shape, Fragrance, Wood_Character, Fruit_Type, Bark_Color, Bark_Texture, Litter_Type, Longevity, Growing_Condition from VarietyMaster where Variety_Name='{varietyName}'";
+                string query = "select Plant_Id, Variety_Id, Variety_Name, Nature, TimeOfSetting, TimeOfFlowering, Rotation_Period, Propagation_Method, Tree_Height, Trunk_Color, Tree_Form, Leaf_Shape, Fragrance, Wood_Character, Fruit_Type, Bark_Color, Bark_Texture, Litter_Type, Longevity, Growing_Condition from VarietyMaster where Variety_Name=@0";
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@0", varietyName);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())

@@ -20,8 +20,9 @@ namespace PTS.Controllers
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = $"select Family_Id,FamilyName,FamilyCommonName, Habitat from FamilyMaster where FamilyName='{familyName}'";
+                string query = "select Family_Id,FamilyName,FamilyCommonName, Habitat from FamilyMaster where FamilyName=@0";
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@0", familyName);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if(reader.Read())

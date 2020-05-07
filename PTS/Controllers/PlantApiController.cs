@@ -19,8 +19,9 @@ namespace PTS.Controllers
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = $"select Family_Id,Plant_Id,Common_Name, Botonical_Name, Chromosome_No, Genus, Species, Uses, Medical_Benefit, Health_Hazard from PlantMaster where Botonical_Name='{botanicalName}'";
+                string query = "select Family_Id,Plant_Id,Common_Name, Botonical_Name, Chromosome_No, Genus, Species, Uses, Medical_Benefit, Health_Hazard from PlantMaster where Botonical_Name=@0";
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@0", botanicalName);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())

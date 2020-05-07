@@ -197,7 +197,10 @@ namespace PTS.Controllers
                     ViewBag.DateOfPlanting = reader["DateOfPlanting"].ToString();
                     ViewBag.LocationOfPlant = reader["Location"].ToString();
 
-
+                    ViewBag.Img1 = reader["Img1"].ToString();
+                    ViewBag.Img2 = reader["Img2"].ToString();
+                    ViewBag.Img3 = reader["Img3"].ToString();
+                    ViewBag.Id = id;
                 }
                 else
                 {
@@ -263,6 +266,67 @@ namespace PTS.Controllers
 
             TempData["Message"] = "Sucessfully updated.";
             return Redirect($"/Plant/Details/{id}");
+        }
+
+        [HttpGet]
+        public void UpdateImages()
+        {
+        }
+
+        [HttpPost]
+        public ActionResult UpdateImages(int uId)
+        {
+            string[] imagePaths = new string[3]; // get the paths and store here
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("select Img1, Img2, Img3 from LocationMaster where UniquePlant_Id=@0", con);
+                cmd.Parameters.AddWithValue("@0", uId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if(reader.Read())
+                {
+                    imagePaths[0] = reader["Img1"].ToString();
+                    imagePaths[1] = reader["Img2"].ToString();
+                    imagePaths[2] = reader["Img3"].ToString();
+                }
+                reader.Close();
+
+                SqlCommand cmd2 = new SqlCommand("update LocationMaster set Img1=@0, Img2=@1, Img3=@2 where UniquePlant_Id=@3", con);
+                if (imagePaths[0] == "")//plant images were never added
+                { 
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        if (Request.Files[i].ContentLength == 0) continue;
+                        string name = $"~/Images/{uId}-image{i}" + Path.GetExtension(Request.Files[i].FileName);
+                        Request.Files[i].SaveAs(Server.MapPath(name));
+                        cmd2.Parameters.AddWithValue($"@{i}", name);
+                    }
+                    cmd2.Parameters.AddWithValue("@3", uId);
+                    cmd2.ExecuteNonQuery();
+                }
+                else//update plants
+                {
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        string name;
+                        if (Request.Files[i].ContentLength == 0)//not uploaded plants
+                        {
+                            name = imagePaths[i];
+                            cmd2.Parameters.AddWithValue($"@{i}", name);
+                            continue;
+                        }
+                        name = $"~/Images/{uId}-image{i}" + Path.GetExtension(Request.Files[i].FileName);
+                        Request.Files[i].SaveAs(Server.MapPath(name));
+                        cmd2.Parameters.AddWithValue($"@{i}", name);
+                    }
+                    cmd2.Parameters.AddWithValue("@3", uId);
+                    cmd2.ExecuteNonQuery();
+                }
+            }
+
+            TempData["Message"] = "Images updated. Sometimes refresh needed to see new images in effect.";
+            return Redirect($"/Plant/Edit/{uId}");
         }
 
         [HttpGet]
@@ -641,19 +705,6 @@ namespace PTS.Controllers
         [HttpPost]
         public ActionResult AddLocationDate(int familyId, int plantId, int varietyId, FormCollection values)
         {
-            string[] imagePaths = new string[3] { "", "", "" };//these are relative paths to store in database
-            string datetime = DateTime.Now.ToString("yyyyMMddHHmmssffffff");
-            for (int i = 0; i < Request.Files.Count; i++)
-            {
-                if (Request.Files[i].ContentLength == 0) continue;
-                string fileName = Path.GetFileNameWithoutExtension(Request.Files[i].FileName);
-                string extension = Path.GetExtension(Request.Files[i].FileName);
-                fileName = fileName + datetime + "-" + i + extension;//preventing duplicay of filename by appending datetime and i value
-                imagePaths[i] = "~/Images/" + fileName;
-                string absolutePath = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                Request.Files[i].SaveAs(absolutePath);
-            }
-
             string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -665,11 +716,6 @@ namespace PTS.Controllers
                 cmd.Parameters.Add(new SqlParameter("@Variety_Id", varietyId));
                 cmd.Parameters.Add(new SqlParameter("@DateOfPlanting", values["dateOfPlanting"]));
                 cmd.Parameters.Add(new SqlParameter("@Location", values["location"]));
-                //below are relative paths to files
-                cmd.Parameters.Add(new SqlParameter("@img1", imagePaths[0]));
-                cmd.Parameters.Add(new SqlParameter("@img2", imagePaths[1]));
-                cmd.Parameters.Add(new SqlParameter("@img3", imagePaths[2]));
-                cmd.Parameters.Add(new SqlParameter("@qr", ""));
 
                 cmd.Parameters.Add(new SqlParameter("@LocEntryBy", Session["Username"]));
                 TempData["Message"] = "Location Details inserted successfully";
@@ -687,13 +733,29 @@ namespace PTS.Controllers
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(uId, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);
                 Bitmap qrCodeImage = qrCode.GetGraphic(20);
+
                 //parameters(imageName, imageFormat) for saving qr
-                qrCodeImage.Save(Path.Combine(Server.MapPath("~/Images/"), uId + ".jpeg"), System.Drawing.Imaging.ImageFormat.Jpeg);
+                string qrPath = "~/Images/" + uId + ".jpeg";
+                qrCodeImage.Save(Server.MapPath(qrPath), System.Drawing.Imaging.ImageFormat.Jpeg);
                 qrCodeImage.Dispose();
 
+                string[] imagePaths = new string[3] { "", "", "" };//these are relative paths to store in database
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    if (Request.Files[i].ContentLength == 0) continue;
+                    string name = $"~/Images/{uId}-image{i}" + Path.GetExtension(Request.Files[i].FileName);
+                    Request.Files[i].SaveAs(Server.MapPath(name));
+                    imagePaths[i] = name;
+                }
+
                 //insert QR path into LocationMaster
-                cmd = new SqlCommand($"update LocationMaster set qr='~/Images/{uId}.jpeg' where uniqueplant_id={uId}", con);
-                cmd.ExecuteNonQuery();
+                SqlCommand cmd2 = new SqlCommand("update LocationMaster set qr=@qr, Img1=@img1, Img2=@img2, Img3=@img3 where uniqueplant_id=@uId", con);
+                cmd2.Parameters.AddWithValue("@qr", qrPath);
+                cmd2.Parameters.AddWithValue("@img1", imagePaths[0]);
+                cmd2.Parameters.AddWithValue("@img2", imagePaths[1]);
+                cmd2.Parameters.AddWithValue("@img3", imagePaths[2]);
+                cmd2.Parameters.AddWithValue("@uId", uId);
+                cmd2.ExecuteNonQuery();
             }
 
             return Redirect($"/Plant/AddLocationDate/?familyId={familyId}&plantId={plantId}&varietyId={varietyId}");

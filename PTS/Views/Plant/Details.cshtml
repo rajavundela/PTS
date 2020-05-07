@@ -16,7 +16,7 @@
             </ol>
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
-                @if(ViewBag.Img1 != ""){
+                @if(ViewBag.Img1 != "" && ViewBag.Img1 != null){
                     <div class="carousel-item active" id="img-container-block">
                         <img src="@Url.Content(ViewBag.Img1)" alt="First image" id="img-box">
                     </div>

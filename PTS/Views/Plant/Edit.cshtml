@@ -1,5 +1,20 @@
 ﻿@{
     ViewBag.Title = "Edit";
+    <style>
+        form img{
+            height:300px;
+            width:auto;
+        }
+    </style>
+    bool required;
+    if(ViewBag.Img1 == "")// plants were never added
+    {
+        required = true;
+    }
+    else
+    {
+        required = false;
+    }
 }
 
 
@@ -131,6 +146,44 @@
             <input type="text" class="form-control" id="LocationOfPlant" name="LocationOfPlant" value="@ViewBag.LocationOfPlant">
         </div>
         <button class="btn btn-outline-primary" type="submit">Update</button>
+    </form>
+    <center><h2>Update Plant Images</h2></center>
+    <form action="@Url.Action("UpdateImages", "Plant")" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <input type="number" name="uId" value="@ViewBag.Id" hidden/>
+        @if (ViewBag.Img1 != "" && ViewBag.Img1 != null)
+        {
+            <img src="@Url.Content(ViewBag.Img1)" alt="First image" id="img-box">
+        }
+        <div>
+            <label for="plantImage1">Add new Image 1 </label>
+            <input type="file" id="plantImage1" name="img1" accept="image/*" required="@required">
+            <div class="valid-feedback">Valid</div>
+            <div class="invalid-feedback">Please select an image.</div>
+        </div>
+        <br>
+        @if (ViewBag.Img2 != "" && ViewBag.Img2 != null)
+        {
+            <img src="@Url.Content(ViewBag.Img2)" alt="Second image" id="img-box">
+        }
+
+        <div>
+            <label for="plantImage2">Add new Image 2 </label>
+            <input type="file" id="plantImage2" name="img2" accept="image/*" required="@required">
+            <div class="valid-feedback">Valid</div>
+            <div class="invalid-feedback">Please select an image.</div>
+        </div>
+        <br>
+        @if (ViewBag.Img3 != "" && ViewBag.Img3 != null)
+        {
+            <img src="@Url.Content(ViewBag.Img3)" alt="Third image" id="img-box">
+        }
+        <div>
+            <label for="plantImage3">Add new Image 3 </label>
+            <input type="file" id="plantImage3" name="img3" accept="image/*" required="@required">
+            <div class="valid-feedback">Valid</div>
+            <div class="invalid-feedback">Please select an image.</div>
+        </div>
+        <button class="btn btn-outline-primary" type="submit">Update Images</button>
     </form>
 </div>
 
