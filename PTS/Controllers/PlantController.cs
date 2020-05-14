@@ -127,15 +127,6 @@ namespace PTS.Controllers
                 }
                 reader.Close();
             }
-
-            //var reader = cmd.ExecuteReader();
-
-            //var columns = new List<string>();
-
-            //for (int i = 0; i < reader.FieldCount; i++)
-            //{
-            //    columns.Add(reader.GetName(i));
-            //}
             return View();
         }
 

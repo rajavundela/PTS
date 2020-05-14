@@ -299,7 +299,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Plant\Index.cshtml" />
     <Content Include="Views\Account\LoginRegister.cshtml" />
     <Content Include="Views\Plant\Search.cshtml" />

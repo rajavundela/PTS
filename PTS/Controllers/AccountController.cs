@@ -19,6 +19,20 @@ namespace PTS.Controllers
                 return RedirectToAction("LoginRegister", "Account");
             }
 
+            string connectionString = "server=pts69dbserver.database.windows.net;user id=pts;password=group7@infotech;database=pts";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "select emailId, datecreated from userdetails where username=@0";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@0", Session["Username"].ToString());
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    ViewBag.Email = reader["EmailId"].ToString();
+                    ViewBag.DateCreated = reader["DateCreated"].ToString();
+                }
+            }
             return View();
         }
 
