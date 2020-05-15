@@ -1,0 +1,918 @@
+# PTS
+Plant Tracking System (Infotech Training Group 7 Project)
+
+/*Create*/
+create proc sp_MenuMaster
+as
+begin 
+select * from MenuMaster
+end
+
+exec sp_MenuMaster
+sp_Rolemaster
+sp_AccessMaster
+sp_FamilyMaster
+sp_PlantMaster
+sp_VarietyMaster
+
+/*Fetch*/
+create proc sp_FetchMenuMaster+
+as
+begin
+select *from MenuMaster
+end
+/*Insert Procedure*/
+create proc sp_InsertProc 
+@Forms varchar(100),
+@URL varchar(100),
+@IsActive bit
+as 
+insert into MenuMaster(Forms,URL,IsActive) values(@Forms,@URL,@IsActive)
+
+exec sp_InsertProc 'Registration','Registration.cshtml',True
+/*Update the MenuMaster*/
+Alter proc sp_UpdateMenuMaster
+@Menu_Id int,
+@Forms varchar(100),
+@URL varchar(100),
+@IsActive bit
+as
+Begin 
+	Update MenuMaster set
+	/*Menu_Id=@Menu_Id,*/
+	Forms=@Forms,
+	URL=@URL,
+	IsActive=@IsActive
+	/*Menu_Modified = GetDate()*/
+
+	where Menu_Id = @Menu_Id
+End
+
+exec sp_UpdateMenuMaster '2','Registration','Registration.cshtml','1'
+exec sp_UpdateMenuMaster @Menu_Id=2, @IsActive=1
+sp_MenuMaster
+
+
+
+/* Delete */
+create proc sp_DeleteProc @Menu_id int 
+as
+begin 
+delete from MenuMaster where Menu_id = @Menu_id
+end
+
+exec sp_DeleteProc 1
+
+/* In out */
+alter proc sp_OutEx @Menu_Id int, @Forms varchar(100) output
+as 
+select @Menu_Id=Menu_Id+','+Forms from MenuMaster where Menu_Id=@Menu_Id
+
+declare @FetchMenuMaster varchar(100)
+exec sp_OutEx 1, @FetchMenuMaster out
+select @FetchMenuMaster
+   
+/* Role Master stored Procedure */
+/*create  the procedure*/
+select * from RoleMaster
+
+create proc sp_RoleMaster
+as
+begin
+select * from RoleMaster
+end
+
+exec sp_RoleMaster
+/*Update Rolemaster */
+Alter proc sp_UpdateRoleMaster
+@Role_Id int,
+@Role varchar(100),
+@IsActive bit
+as
+begin
+	update RoleMaster set
+Role = @Role,
+IsActive = @IsActive
+
+where Role_Id = @Role_Id
+end
+exec sp_UpdateRoleMaster '1','Admin','0'
+sp_RoleMaster
+
+
+/* Insert procedure for the role master*/
+alter proc sp_InsertRoleMaster @Role varchar(100),@IsActive bit
+as 
+insert into RoleMaster(Role,IsActive) values (@Role,@IsActive)
+
+exec sp_InsertRoleMaster 'Admin',True
+exec sp_InsertRoleMaster 'Moderate',True
+
+/* Delete procedure for the role master */
+create proc sp_DeleteRoleMaster @Role_Id int
+as
+begin
+delete from RoleMaster where Role_Id=@Role_Id
+end
+
+exec sp_DeleteRoleMaster 2
+
+/* AccessMaster Stored Procedure */
+create Proc sp_AccessMaster
+as
+begin
+select * from AccessMaster
+end
+exec sp_AccessMaster
+
+/* Insert stored procedure in AccessMaster */
+alter Proc sp_InsertAccessMaster @IsActive bit
+as
+insert into AccessMaster(IsActive) values (@IsActive)
+exec sp_InsertAccessMaster True
+
+/* Update stored procedure for the Accessmaster*/
+create proc sp_UpdateAccessMaster 
+@Access_Id int,
+@Menu_Id int,
+@Role_Id int,
+@IsActive bit
+as
+begin
+	update AccessMaster set
+	IsActive = @IsActive
+	where Access_Id = @Access_Id
+	end
+
+/* Delete stored procedure for AccessMaster */
+create proc sp_DeleteAccessMaster @Access_Id int
+as 
+begin
+delete from AccessMaster where @Access_Id=Access_Id
+end
+exec sp_DeleteAccessMaster 0
+
+ select * from VarietyMaster
+ select * from PlantMaster
+ select * from UsesMaster 
+
+
+ /* Now we are going implement the stored procedure in Detail tables */
+
+ /*family table stored procedure */
+ 
+Select * from FamilyMaster
+create proc sp_FamilyMaster
+as
+begin
+select * from FamilyMaster
+end
+
+exec sp_FamilyMaster
+/* insert stored proc for family table*/
+
+create proc sp_InsertFamilyMaster
+@Family_Id int,
+@FamilyName varchar(100),
+@FamilyCommonName varchar(100),
+@Habitat varchar(100),
+@ModifyBy varchar(100),
+@EntryBy varchar(100),
+@ModifiedDate datetime
+as
+begin 
+insert into FamilyMaster(FamilyName, FamilyCommonName, Habitat, ModifyBy, EntryBy, ModifiedDate) values
+(@FamilyName,@FamilyCommonName,@Habitat,@ModifyBy,@EntryBy,@ModifiedDate)
+end
+sp_FamilyMaster
+
+/* Update the family table*/
+
+create proc sp_UpdateFamilyMaster
+@Family_Id int,
+@FamilyName varchar(100),
+@FamilyCommonName varchar(100),
+@Habitat varchar(100),
+@ModifyBy varchar(100),
+@EntryBy varchar(100),
+@ModifiedDate datetime
+as
+begin 
+	update FamilyMaster set
+
+FamilyName=@FamilyName,
+FamilyCommonName=@FamilyCommonName, 
+Habitat=@Habitat,
+ModifyBy=@ModifyBy,
+EntryBy=@EntryBy,
+ModifiedDate=@ModifiedDate
+where Family_Id = @Family_Id
+end
+
+/*Delete the stored procedure*/
+create proc sp_DeleteFamilyMaster
+@Family_Id int
+as begin
+delete from FamilyMaster 
+where
+Family_Id=@Family_Id
+end
+/* Now i am goiing plant master stored procedure*/
+select * from PlantMaster
+create proc sp_PlantMaster
+as begin 
+select * from PlantMaster
+end
+/* insert stored procedure for plant */
+alter proc sp_InsertPlantMaster
+@Family_Id int,
+@Plant_Id int,
+@Commmon_Name varchar(100),
+@Botonical_Name varchar(100),
+@Chromosome_No int,
+@Genus varchar(100),
+@Species varchar(100),
+@Uses varchar(100),
+@Medical_Benefit varchar(100),
+@Health_Hazard varchar(100)
+as begin
+insert into PlantMaster(Family_Id,Plant_Id,Common_Name,Botonical_Name,Chromosome_No,Genus,Species,Uses,Medical_Benefit,Health_Hazard)
+values(
+@Family_Id,
+@Plant_Id,
+@Commmon_Name,
+@Botonical_Name,
+@Chromosome_No,
+@Genus,
+@Species,
+@Uses,
+@Medical_Benefit,
+@Health_Hazard)
+end
+/* Update for the PlantMaster */
+Alter proc sp_UpdatePlantMaster
+@Family_Id int,
+@Commmon_Name varchar(100),
+@Botonical_Name varchar(100),
+@Chromosome_No varchar(100),
+@Genus varchar(100),
+@Species varchar(100),
+@Uses varchar(100),
+@Medical_Benefit varchar(100),
+@Health_Hazard varchar(100)
+as begin
+update PlantMaster set
+Common_Name = @Commmon_Name,
+Botonical_Name = @Botonical_Name,
+Chromosome_No = @Chromosome_No,
+Genus = @Genus,
+Species = @Species,
+Uses = @Uses,
+Medical_Benefit= @Medical_Benefit,
+Health_Hazard = @Health_Hazard
+where Family_Id = @Family_Id
+end
+/* Delete opreation through stored procedure in PlantMAster*/
+create proc sp_DeletePlantMaster
+@Plant_Id int
+as begin
+delete from PlantMaster
+where Plant_Id = @Plant_Id
+end
+/* Now we  are going to make the stored for biggest table of our database */
+create proc sp_VarietyMaster
+as begin
+select * from VarietyMaster
+end
+
+exec sp_VarietyMaster
+
+/* Update procedure of variety table*/
+create proc sp_UpdateVarietyMaster
+@Plant_Id int,
+@Variety_Id int,
+@Variety_Name varchar(100),
+@Nature varchar(100),
+@TimeOfSetting varchar(100),
+@TimeOfFlowering varchar(100),
+@Rotation_Period varchar(100),
+@Propagation_Method varchar(100),
+@image varchar(100),
+@Tree_height real,
+@Trunk_color varchar(100),
+@Tree_Form varchar(100),
+@Leaf_Shape varchar(100),
+@Fragrance varchar(100),
+@Wood_Character varchar(100),
+@Fruit_Type varchar(100),
+@Bark_Color varchar(100),
+@Bark_texture varchar(100),
+@Litter_Type varchar(100),
+@Longevity varchar(100),
+@Growing_Condition varchar(100)
+as 
+begin
+	update VarietyMaster set
+Variety_Name=@Variety_Name,
+Nature=@Nature,
+TimeOfSetting=@TimeOfSetting, 
+TimeOfFlowering=@TimeOfFlowering, 
+Rotation_Period=@Rotation_Period,
+Propagation_Method=@Propagation_Method, 
+image=@image,
+Tree_height=@Tree_height, 
+Trunk_Color=@Trunk_color,
+Tree_Form=@Tree_Form,
+Leaf_Shape=@Leaf_Shape,
+Fragrance =@Fragrance,
+Wood_Character=@Wood_Character,
+Fruit_Type=@Fruit_Type,
+Bark_Color=@Bark_Color, 
+Bark_texture=@Bark_texture,
+Litter_Type=@Litter_Type,
+Longevity=@Longevity, 
+Growing_Condition=@Growing_Condition 
+
+ where Variety_Id = @Variety_Id
+ end
+ sp_VarietyMaster
+ 
+ /*Delete stored procedure of variety table*/
+ create proc sp_DeleteVarietyMaster
+ @Variety_Id int
+ as begin
+ delete from VarietyMaster
+ where
+ Variety_Id=@Variety_Id
+ end
+
+  /* insert stored procedure */
+alter proc sp_InsertVarietyMaster
+ @Plant_Id int,
+@Variety_Id int,
+@Variety_Name varchar(100),
+@Nature varchar(100),
+@TimeOfSetting varchar(100),
+@TimeOfFlowering varchar(100),
+@Rotation_Period varchar(100),
+@Propagation_Method varchar(100),
+@image varchar(100),
+@Tree_height real,
+@Trunk_color varchar(100),
+@Tree_Form varchar(100),
+@Leaf_Shape varchar(100),
+@Fragrance varchar(100),
+@Wood_Character varchar(100),
+@Fruit_Type varchar(100),
+@Bark_Color varchar(100),
+@Bark_texture varchar(100),
+@Litter_Type varchar(100),
+@Longevity varchar(100),
+@Growing_Condition varchar(100)
+as begin
+insert into VarietyMaster(Variety_Name,Nature,TimeOfSetting,TimeOfFlowering,Rotation_Period,Propagation_Method,image,Tree_height,Trunk_Color,Tree_Form,Leaf_Shape,Fragrance,Wood_Character,Fruit_Type,Bark_Color,Bark_texture,Litter_Type,Longevity,Growing_Condition)
+values
+(@Variety_Name,
+@Nature,
+@TimeOfSetting,
+@TimeOfFlowering, 
+@Rotation_Period,
+@Propagation_Method, 
+@image,
+@Tree_height,
+@Trunk_color,
+@Tree_Form ,
+@Leaf_Shape,
+@Fragrance,
+@Wood_Character, 
+@Fruit_Type,
+@Bark_Color,
+@Bark_texture, 
+@Litter_Type,
+@Longevity,
+@Growing_Condition)
+end
+
+
+
+
+ /* Now after sucking alot in biggest table moving towards the uses table*/
+ create proc sp_UsesMaster
+ as begin
+ select * from UsesMaster
+ end
+
+ exec sp_UsesMaster
+
+/* insert stored procedure of uses table*/
+Alter proc sp_InsertUsesMaster
+@Plant_Id int,
+@Uses varchar(100),
+@Medical_Benefit varchar(100),
+@Health_Hazard varchar(100)
+as begin
+insert into UsesMaster(Uses,Medical_Benefit,Health_Hazard) values (@Uses,@Medical_Benefit,@Health_Hazard)
+end
+
+/* update stored procedure */
+create proc sp_UpdateUsesMaster
+@Plant_Id int,
+@USes varchar(100),
+@Medical_Benefit varchar(100),
+@Health_Hazard varchar(100)
+as begin
+	update UsesMaster set
+	Uses = @Uses,
+	Medical_Benefit=@Medical_Benefit,
+	Health_Hazard=@Health_Hazard
+where
+Plant_Id = @Plant_Id
+end
+
+/* Delete the stored procedure */
+create proc sp_DeleteUsesMaster
+@Plant_Id int
+as begin 
+delete UsesMaster where
+Plant_Id = @Plant_Id
+end
+
+/* text search stored procedure web page search 
+
+Now are going to make most important  stored procedure 
+sorting and searching so if ther is millions of data rows in table then you can uplift the particular required 
+filteration, sorting and searching.
+ok no more gyanbaaji 
+Let's fuck
+*/
+sp_Familymaster
+create proc sp_SearchFamilyMaster
+@DisplayLength int,
+@DisplayStart int,
+@SortCol int,
+@SortDir nvarchar(10),
+@Search nvarchar(255)=NULL
+as
+begin  
+	Declare @FirstRec int, @LastRec int
+	set @FirstRec = @DisplayStart;
+	set @LastRec=@DisplayStart + @DisplayLength;
+
+	with CTE_FamilyMaster as
+	(
+	select ROW_NUMBER() over (order by
+	case when (@SortCol = 0 and @SortDir='asc')
+		then Family_Id
+		end asc,
+		case when (@SortCol = 0 and @SortDir='desc')
+		then Family_Id
+		end desc, 
+
+	case when(@SortCol =1 and @SortDir='asc')
+		then FamilyName
+		end asc,
+		case when(@SortCol =1 and @SortDir='desc')
+		then FamilyName
+		end desc,
+
+	case when(@SortCol = 2 and @SortDir ='asc')
+		then FamilyCommonName
+		end asc,
+		case when(@SortCol = 2 and @SortDir = 'desc')
+		then FamilyCommonName
+		end desc,
+	
+	case when(@SortCol = 3 and @SortDir ='asc')
+		then Habitat
+		end asc,
+		case when(@SortCol = 3 and @SortDir = 'desc')
+		then Habitat
+		end desc,
+	
+	case when(@SortCol = 4 and @SortDir ='asc')
+		then ModifyBy
+		end asc,
+		case when(@SortCol = 4 and @SortDir = 'desc')
+		then ModifyBy
+		end desc,
+	
+	case when(@SortCol = 5 and @SortDir ='asc')
+		then ModifiedDate
+		end asc,
+		case when(@SortCol = 5 and @SortDir = 'desc')
+		then ModifiedDate
+		end desc
+		)
+		as RowNum,
+		COUNT(*) over() as ToatalCount,
+		Family_Id,
+		FamilyName,
+		FamilyCommonName,
+		Habitat,
+		ModifyBy,
+		ModifiedDate
+		from FamilyMaster
+		where (@Search IS NULL
+				or Family_Id like  '%' + @Search + '%'
+				or FamilyName like  '%' + @Search + '%'
+				or FamilyCommonName like  '%' + @Search + '%'
+				or Habitat like  '%' + @Search + '%'
+				or ModifyBY like  '%' + @Search + '%'
+				or ModifiedDate like  '%' + @Search + '%')
+	)
+	
+    Select *
+    from CTE_FamilyMaster
+    where RowNum > @FirstRec and RowNum <= @LastRec
+	end
+	
+	sp_FamilyMaster 
+
+	/*Search stored procedure for the Plant table */
+	sp_VarietyMaster
+create Proc sp_SearchVarietyMaster
+@DisplayLength int,
+@DisplayStart int,
+@SortCol int,
+@SortDir nvarchar(10),
+@Search nvarchar(255)=NULL
+as
+begin  
+	Declare @FirstRec int, @LastRec int
+	set @FirstRec = @DisplayStart;
+	set @LastRec=@DisplayStart + @DisplayLength;
+	with CTE_VarietyMaster as
+	(
+	select ROW_NUMBER() over (order by
+	case when (@SortCol = 0 and @SortDir='asc')
+		then Variety_Id
+		end asc,
+		case when (@SortCol = 0 and @SortDir='desc')
+		then Variety_Id
+		end desc, 
+
+	case when(@SortCol =1 and @SortDir='asc')
+		then Plant_Id
+		end asc,
+		case when(@SortCol =1 and @SortDir='desc')
+		then Plant_Id
+		end desc,
+
+	case when(@SortCol = 2 and @SortDir ='asc')
+		then Variety_Name
+		end asc,
+		case when(@SortCol = 2 and @SortDir = 'desc')
+		then Variety_Name
+		end desc,
+	
+	case when(@SortCol = 3 and @SortDir ='asc')
+		then Nature
+		end asc,
+		case when(@SortCol = 3 and @SortDir = 'desc')
+		then Nature
+		end desc,
+	
+	case when(@SortCol = 4 and @SortDir ='asc')
+		then TimeOFSetting
+		end asc,
+		case when(@SortCol = 4 and @SortDir = 'desc')
+		then TimeOfSetting
+		end desc,
+	
+	case when(@SortCol = 5 and @SortDir ='asc')
+		then TimeOfFlowering
+		end asc,
+		case when(@SortCol = 5 and @SortDir = 'desc')
+		then TimeOfFlowering
+		end desc,
+
+	case when(@SortCol = 6 and @SortDir ='asc')
+		then Rotation_Period
+		end asc,
+		case when(@SortCol = 6 and @SortDir = 'desc')
+		then Rotation_Period
+		end desc,
+
+	case when(@SortCol = 7 and @SortDir ='asc')
+		then image
+		end asc,
+		case when(@SortCol = 7 and @SortDir = 'desc')
+		then image
+		end desc,
+
+	   case when(@SortCol = 8 and @SortDir ='asc')
+		then Tree_height
+		end asc,
+		case when(@SortCol = 8 and @SortDir ='desc')
+		then Tree_height
+		end desc,
+
+	case when(@SortCol = 9 and @SortDir ='asc')
+		then Trunk_Color
+		end asc,
+		case when(@SortCol = 9 and @SortDir ='desc')
+		then Trunk_Color
+		end desc,
+
+	case when(@SortCol = 10 and @SortDir ='asc')
+		then Tree_Form
+		end asc,
+		case when(@SortCol = 10 and @SortDir ='desc')
+		then Trunk_Color
+		end desc,
+
+	case when(@SortCol = 11 and @SortDir ='asc')
+		then Tree_Form
+		end asc,
+		case when(@SortCol = 11 and @SortDir ='desc')
+		then Tree_Form
+		end desc,
+
+	case when(@SortCol = 12 and @SortDir ='asc')
+		then Leaf_Shape
+		end asc,
+		case when(@SortCol = 12 and @SortDir ='desc')
+		then Leaf_Shape
+		end desc,
+	
+	case when(@SortCol = 13 and @SortDir ='asc')
+		then Tree_Form
+		end asc,
+		case when(@SortCol = 13 and @SortDir ='desc')
+		then Tree_Form
+		end desc,
+
+	case when(@SortCol = 14 and @SortDir ='asc')
+		then Leaf_Shape
+		end asc,
+		case when(@SortCol = 14 and @SortDir ='desc')
+		then Leaf_Shape
+		end desc,
+
+	case when(@SortCol = 15 and @SortDir ='asc')
+		then Fragrance
+		end asc,
+		case when(@SortCol = 15 and @SortDir ='desc')
+		then Fragrance
+		end desc,
+
+	case when(@SortCol = 16 and @SortDir ='asc')
+		then Wood_Character
+		end asc,
+		case when(@SortCol = 16 and @SortDir ='desc')
+		then Wood_Character
+		end desc,
+
+	case when(@SortCol = 17 and @SortDir ='asc')
+		then Fruit_Type
+		end asc,
+		case when(@SortCol = 17 and @SortDir ='desc')
+		then Fruit_Type
+		end desc,
+
+	case when(@SortCol = 18 and @SortDir ='asc')
+		then Bark_Color
+		end asc,
+		case when(@SortCol = 18 and @SortDir ='desc')
+		then Bark_Color
+		end desc,
+
+	case when(@SortCol = 19 and @SortDir ='asc')
+		then Bark_texture
+		end asc,
+		case when(@SortCol = 19 and @SortDir ='desc')
+		then Bark_texture
+		end desc,
+
+	case when(@SortCol = 20 and @SortDir ='asc')
+		then Litter_Type
+		end asc,
+		case when(@SortCol = 20 and @SortDir ='desc')
+		then Litter_Type
+		end desc,
+
+	case when(@SortCol = 21 and @SortDir ='asc')
+		then Longevity
+		end asc,
+		case when(@SortCol = 21 and @SortDir ='desc')
+		then Longevity
+		end desc,
+
+	case when(@SortCol = 22 and @SortDir ='asc')
+		then Growing_Condition
+		end asc,
+		case when(@SortCol = 22 and @SortDir ='desc')
+		then Growing_Condition
+		end desc
+
+		)
+			as RowNum,
+		COUNT(*) over() as ToatalCount,
+		Variety_Id,
+		Plant_Id,
+		Variety_Name,
+		Nature,
+		TimeOfSetting,
+		Rotation_Period,
+		image,
+		Tree_height,
+		Trunk_Color,
+		Tree_Form,
+		Leaf_Shape,
+		Fragrance,
+		Wood_Character,
+		Fruit_Type,
+		Bark_Color,
+		Bark_texture,
+		Litter_Type,
+		Longevity,
+		Growing_Condition
+		from VarietyMaster
+		where (@Search IS NULL
+				or Variety_Id like  '%' + @Search + '%'
+				or Plant_Id like  '%' + @Search + '%'
+				or Nature like  '%' + @Search + '%'
+				or TimeOfSetting like  '%' + @Search + '%'
+				or TimeOfFlowering like  '%' + @Search + '%'
+				or Rotation_Period like  '%' + @Search + '%'
+				or Propagation_Method like  '%' + @Search + '%'
+				or image like  '%' + @Search + '%'
+				or Tree_height like '%' + @Search + '%'
+				or Trunk_Color like  '%' + @Search + '%'
+				or Tree_Form like  '%' + @Search + '%'
+				or Leaf_Shape like  '%' + @Search + '%'
+				or Fragrance like  '%' + @Search + '%'
+				or Wood_Character like  '%' + @Search + '%'
+				or Fruit_Type like  '%' + @Search + '%'
+				or Bark_Color like  '%' + @Search + '%'
+				or Bark_texture like  '%' + @Search + '%'
+				or Litter_Type like  '%' + @Search + '%'
+				or Longevity like  '%' + @Search + '%'
+				or Growing_Condition like  '%' + @Search + '%'
+				)
+	)
+    Select *
+    from CTE_VarietyMaster
+
+    where RowNum > @FirstRec and RowNum <= @LastRec 
+	end 
+	sp_VarietyMaster
+exec sp_SearchVarietyMaster '10','0','0','asc','ango'
+
+sp_FamilyMaster
+sp_PlantMaster
+
+select*from LocationMaster
+
+/* Here I am creating stored procedure for view all */
+create proc sp_ViewAll
+as begin
+select * from FamilyMaster
+Left Join PlantMaster on FamilyMaster.Family_Id = PlantMaster.Family_Id
+Left Join VarietyMaster on PlantMaster.Plant_Id = VarietyMaster.Plant_Id
+Left Join UsesMaster on VarietyMaster.Plant_Id = UsesMaster.Plant_Id
+Left Join LocationMaster on UsesMaster.Plant_Id = LocationMaster.Plant_Id;
+end
+sp_ViewAll
+sp_LocationMaster
+select * from LocationMaster
+sp_renamediagram
+
+
+/* Search with using joins*/
+declare @var varchar(500)='Banana'
+
+select * from FamilyMaster
+inner join  PlantMaster on FamilyMaster.Family_Id=PlantMaster.Family_Id
+where FamilyName+common_name+Botonical_Name like '%'+@var +'%'
+
+Alter proc sp_Search
+@Search varchar(255)=NULL
+as begin
+select * from FamilyMaster
+Left Join PlantMaster on FamilyMaster.Family_Id = PlantMaster.Family_Id
+Left Join VarietyMaster on PlantMaster.Plant_Id = VarietyMaster.Plant_Id
+Left Join UsesMaster on VarietyMaster.Plant_Id = UsesMaster.Plant_Id
+Left Join LocationMaster on UsesMaster.Plant_Id = LocationMaster.Plant_Id
+where
+/*(FamilyName+FamilyCommonName+Habitat+Common_Name+Botonical_Name+Chromosome_No+Genus
+				+Species+Variety_Name+Nature+TimeOfSetting+TimeOfFlowering+Rotation_Period+Propagation_Method+image+Tree_height+Trunk_Color
+				+Tree_Form+Leaf_Shape+Fragrance+Wood_Character+Fruit_Type+Bark_Color+Bark_texture+Litter_Type+Longevity+Growing_Condition+Uses+
+				Medical_Benefit+Health_Hazard+Location+QR like '%'+@Search+'%')*/
+				(@Search IS NULL
+				or FamilyName like  '%' + @Search + '%'
+				or FamilyCommonName like  '%' + @Search + '%'
+				or Habitat like  '%' + @Search + '%'
+				or ModifyBY like  '%' + @Search + '%'
+				or ModifiedDate like  '%' + @Search + '%'
+				or Nature like  '%' + @Search + '%'
+				or TimeOfSetting like  '%' + @Search + '%'
+				or TimeOfFlowering like  '%' + @Search + '%'
+				or Rotation_Period like  '%' + @Search + '%'
+				or Propagation_Method like  '%' + @Search + '%'
+				or image like  '%' + @Search + '%'
+				or Tree_height like '%' + @Search + '%'
+				or Trunk_Color like  '%' + @Search + '%'
+				or Tree_Form like  '%' + @Search + '%'
+				or Leaf_Shape like  '%' + @Search + '%'
+				or Fragrance like  '%' + @Search + '%'
+				or Wood_Character like  '%' + @Search + '%'
+				or Fruit_Type like  '%' + @Search + '%'
+				or Bark_Color like  '%' + @Search + '%'
+				or Bark_texture like  '%' + @Search + '%'
+				or Litter_Type like  '%' + @Search + '%'
+				or Longevity like  '%' + @Search + '%'
+				or Growing_Condition like  '%' + @Search + '%'
+				or Common_Name like  '%' + @Search + '%'
+				or Botonical_Name like  '%' + @Search + '%'
+				or Chromosome_NO like  '%' + @Search + '%'
+				or Genus like  '%' + @Search + '%'
+				or Species like  '%' + @Search + '%'
+				or Uses like  '%' + @Search + '%'
+				or Medical_Benefit like  '%' + @Search + '%'
+				or Health_Hazard like  '%' + @Search + '%'
+				or Location like  '%' + @Search + '%'
+				or QR like  '%' + @Search + '%'
+				)
+end
+select * from LocationMaster
+sp_ViewAll
+sp_PlantMaster
+sp_VarietyMaster
+sp_
+
+create proc sp_ViewAll
+as begin
+select * from FamilyMaster
+Left Join PlantMaster on FamilyMaster.Family_Id = PlantMaster.Family_Id
+Left Join VarietyMaster on PlantMaster.Plant_Id = VarietyMaster.Plant_Id
+Left Join UsesMaster on VarietyMaster.Plant_Id = UsesMaster.Plant_Id
+Left Join LocationMaster on UsesMaster.Plant_Id = LocationMaster.Plant_Id;
+end
+
+sp_ViewAll
+
+select Family_Id,FamilyName,FamilyCommonName from FamilyMaster
+intersect select  Plant_Id,Common_Name from PlantMaster
+intersect select Variety_Id, Variety_Name from VarietyMaster
+intersect select Location from LocationMaster
+
+ 
+select  F.Family_Id,F.FamilyName,F.FamilyCommonName, P.Plant_Id,P.Common_Name,
+V.Variety_Id, V.Variety_Name, L.Location
+from FamilyMaster F
+LEFT JOIN PlantMaster P
+ON F.Family_Id=P.Family_Id
+LEFT JOIN VarietyMaster V
+ON P.Plant_Id = P.Plant_Id
+LEFT JOIN LocationMaster as L
+ON V.Variety_Id = L.Variety_Id
+
+select FamilyMaster.Family_Id,FamilyMaster.FamilyName,FamilyMaster.FamilyCommmonName
+
+Create function [dbo].[pts]() 
+returns char(6) 
+as 
+begin 
+	DECLARE @lastval INT 
+	SET @lastval = (select MAX(Cast(right(Family_Id,4) as int))  from FamilyMaster) 
+	if @lastval is null set @lastval = 0 
+	Return 'FID' + right('0000' + convert(varchar(10),(@lastval + 1)),4) 
+end
+select * from LocationMaster
+sp_PlantMaster  
+sp_familyMaster
+sp_ViewAll
+sp_Search 'Langra'
+sp_searchdetail
+sp_Details_Search '1'
+
+/* here we are going to create stored procedure for BlogMaster */
+create proc sp_BlogKeyword
+@BlogName varchar(50),
+@Keyword varchar(50)
+as
+insert into BlogKeywordMaster(BlogName,Keyword) values(@BlogName,@Keyword)
+return 0
+
+create proc sp_BlogCategory
+@Name varchar(50)
+as 
+insert into BlogCategoryMaster(Name) values(@Name)
+
+
+Create proc CreateBlog
+@UserName Varchar(100),
+@Title varchar(100),
+@Snippet varchar(max),
+@Post varchar(max),
+@Category varchar(50),
+@Published bit
+as 
+insert into BlogMaster(UserName,Title,Snippet,Post,Category,Published) values
+(@UserName,@Title,@Snippet,@Post,@Category,@Published)
+return 0
+
+
+
+
